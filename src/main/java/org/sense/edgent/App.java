@@ -20,9 +20,12 @@ public class App {
 			String msg = (new Scanner(System.in)).nextLine();
 			app = Integer.valueOf(msg);
 			switch (app) {
+			case 0:
+				System.out.println("bis später");
+				break;
 			case 1:
 				System.out.println("App 1 selected");
-				TempSensorApp tempSensorApp = new TempSensorApp();
+				new TempSensorApp();
 				app = 0;
 				break;
 			case 2:
@@ -32,12 +35,11 @@ public class App {
 				break;
 			case 3:
 				System.out.println("App 3 selected");
-				UltrasonicEdgentApp ultrasonicEdgentApp = new UltrasonicEdgentApp();
+				new UltrasonicEdgentApp();
 				app = 0;
 				break;
 			default:
 				System.out.println("No application selected [" + app + "] ");
-				app = 0;
 				break;
 			}
 		} while (app != 0);
