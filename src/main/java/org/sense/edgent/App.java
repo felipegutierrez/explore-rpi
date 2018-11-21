@@ -15,7 +15,7 @@ public class App {
 			System.out.println("1 - TempSensor using Apache Edgent");
 			System.out.println("2 - Ultrasonic sensor raw implementation");
 			System.out.println("3 - Ultrasonic sensor with Apache Edgent");
-			System.out.print("Please enter which application you want to run: ");
+			System.out.print("    Please enter which application you want to run: ");
 
 			String msg = (new Scanner(System.in)).nextLine();
 			app = Integer.valueOf(msg);

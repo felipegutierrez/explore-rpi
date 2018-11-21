@@ -9,6 +9,13 @@ import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.RaspiPin;
 
+/**
+ * This class aims to work with the HCSR04 Ultrasonic sensor on a Raspberry Pi
+ * and use Apache Edgent to poll values from the sensor as data streaming.
+ * 
+ * @author Felipe Oliveira Gutierrez
+ *
+ */
 public class UltrasonicStream implements Supplier<Double> {
 
 	private static final long serialVersionUID = -6511218542753341056L;
@@ -16,9 +23,12 @@ public class UltrasonicStream implements Supplier<Double> {
 	private static GpioPinDigitalOutput sensorTriggerPin;
 	private static GpioPinDigitalInput sensorEchoPin;
 	private static final GpioController gpio = GpioFactory.getInstance();
+	private double currentDistance = -1.0;
 
-	double currentDistance = -1.0;
-
+	/**
+	 * The HCSR04 Ultrasonic sensor is connected on the physical pin 16 and 18 which
+	 * correspond to the GPIO 04 and 05 of the WiringPi library.
+	 */
 	public UltrasonicStream() {
 		// Trigger pin as OUTPUT
 		sensorTriggerPin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04);
@@ -26,6 +36,9 @@ public class UltrasonicStream implements Supplier<Double> {
 		sensorEchoPin = gpio.provisionDigitalInputPin(RaspiPin.GPIO_05, PinPullResistance.PULL_DOWN);
 	}
 
+	/**
+	 * This is the override method of the Supplier interface from Apache Edgent
+	 */
 	@Override
 	public Double get() {
 		try {
@@ -38,6 +51,13 @@ public class UltrasonicStream implements Supplier<Double> {
 		return currentDistance;
 	}
 
+	/**
+	 * Retrieve the distance measured by the HCSR04 Ultrasonic sensor connected on a
+	 * Raspberry Pi 3+B
+	 * 
+	 * @return the distance in centimeters
+	 * @throws InterruptedException
+	 */
 	public double getDistance() throws InterruptedException {
 
 		double distanceCM = -1;
