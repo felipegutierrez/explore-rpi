@@ -1,39 +1,45 @@
 package org.sense.edgent;
 
-import java.util.concurrent.TimeUnit;
+import java.util.Scanner;
 
-import org.apache.edgent.providers.direct.DirectProvider;
-import org.apache.edgent.topology.TStream;
-import org.apache.edgent.topology.Topology;
-import org.sense.sensor.TempSensor;
-import org.sense.sensor.Ultrasonic;
+import org.sense.edgent.app.TempSensorApp;
+import org.sense.edgent.app.UltrasonicApp;
+import org.sense.edgent.app.UltrasonicEdgentApp;
 
 public class App {
 	public static void main(String[] args) throws Exception {
 
-		Ultrasonic sonic = new Ultrasonic(0, // ECO 11
-				1, // TRIG 22
-				1000, // REJECTION_START ; long
-				23529411 // REJECTION_TIME ; long
-		);
-		System.out.println("Start");
-		while (true) {
-			System.out.println("distance " + sonic.getDistance() + "mm");
-			Thread.sleep(1000); // 1s
-		}
-		
-		/**
+		int app = 0;
+		do {
+			System.out.println("0 - exit");
+			System.out.println("1 - TempSensor using Apache Edgent");
+			System.out.println("2 - Ultrasonic sensor raw implementation");
+			System.out.println("3 - Ultrasonic sensor with Apache Edgent");
+			System.out.print("Please enter which application you want to run: ");
 
-		System.out.println("Hello World!");
-		TempSensor sensor = new TempSensor();
-		DirectProvider dp = new DirectProvider();
-		Topology topology = dp.newTopology();
-
-		TStream<Double> tempReadings = topology.poll(sensor, 1, TimeUnit.MILLISECONDS);
-		TStream<Double> filteredReadings = tempReadings.filter(reading -> reading < 50 || reading > 80);
-		filteredReadings.print();
-
-		dp.submit(topology);
-		 */
+			String msg = (new Scanner(System.in)).nextLine();
+			app = Integer.valueOf(msg);
+			switch (app) {
+			case 1:
+				System.out.println("App 1 selected");
+				TempSensorApp tempSensorApp = new TempSensorApp();
+				app = 0;
+				break;
+			case 2:
+				System.out.println("App 2 selected");
+				new UltrasonicApp();
+				app = 0;
+				break;
+			case 3:
+				System.out.println("App 3 selected");
+				UltrasonicEdgentApp ultrasonicEdgentApp = new UltrasonicEdgentApp();
+				app = 0;
+				break;
+			default:
+				System.out.println("No application selected [" + app + "] ");
+				app = 0;
+				break;
+			}
+		} while (app != 0);
 	}
 }
