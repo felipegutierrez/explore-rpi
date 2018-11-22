@@ -21,9 +21,15 @@ public class UltrasonicEdgentApp {
 
 		TStream<Double> tempReadings = topology.poll(sensor, 3, TimeUnit.SECONDS);
 
-		TStream<Double> filteredReadings = tempReadings.filter(reading -> reading < 50 || reading > 80);
-
-		System.out.println("filter added: tempReadings.filter(reading -> reading < 50 || reading > 80);");
+		// TStream<Double> filteredReadings = tempReadings.filter(reading -> reading <
+		// 50 || reading > 80);
+		TStream<Double> filteredReadings = tempReadings.filter(reading -> {
+			boolean threshold = reading < 20 || reading > 80;
+			if (!threshold) {
+				System.out.println(String.format("Threshold reached: %s cm", reading));
+			}
+			return threshold;
+		});
 
 		filteredReadings.print();
 
