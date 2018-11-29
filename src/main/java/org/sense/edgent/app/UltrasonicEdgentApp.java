@@ -11,7 +11,7 @@ public class UltrasonicEdgentApp {
 
 	public UltrasonicEdgentApp() {
 
-		System.out.println("HCSR04 Ultrasonic distance sensor");
+		System.out.println("HCSR04 Ultrasonic distance sensor - filter");
 
 		UltrasonicStream sensor = new UltrasonicStream();
 
@@ -21,8 +21,6 @@ public class UltrasonicEdgentApp {
 
 		TStream<Double> tempReadings = topology.poll(sensor, 3, TimeUnit.SECONDS);
 
-		// TStream<Double> filteredReadings = tempReadings.filter(reading -> reading <
-		// 50 || reading > 80);
 		TStream<Double> filteredReadings = tempReadings.filter(reading -> {
 			boolean threshold = reading < 20 || reading > 80;
 			if (!threshold) {
@@ -30,7 +28,6 @@ public class UltrasonicEdgentApp {
 			}
 			return threshold;
 		});
-
 		filteredReadings.print();
 
 		dp.submit(topology);

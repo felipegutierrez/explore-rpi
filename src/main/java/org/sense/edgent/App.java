@@ -5,6 +5,7 @@ import java.util.Scanner;
 import org.sense.edgent.app.TempSensorApp;
 import org.sense.edgent.app.UltrasonicApp;
 import org.sense.edgent.app.UltrasonicEdgentApp;
+import org.sense.edgent.app.UltrasonicEdgentWindowApp;
 
 public class App {
 	public static void main(String[] args) throws Exception {
@@ -14,7 +15,8 @@ public class App {
 			System.out.println("0 - exit");
 			System.out.println("1 - TempSensor using Apache Edgent");
 			System.out.println("2 - Ultrasonic sensor raw implementation");
-			System.out.println("3 - Ultrasonic sensor with Apache Edgent");
+			System.out.println("3 - Ultrasonic sensor filter with Apache Edgent");
+			System.out.println("4 - Ultrasonic sensor window average with Apache Edgent");
 			System.out.print("    Please enter which application you want to run: ");
 
 			String msg = (new Scanner(System.in)).nextLine();
@@ -36,6 +38,11 @@ public class App {
 			case 3:
 				System.out.println("App 3 selected");
 				new UltrasonicEdgentApp();
+				app = 0;
+				break;
+			case 4:
+				System.out.println("App 4 selected");
+				new UltrasonicEdgentWindowApp();
 				app = 0;
 				break;
 			default:

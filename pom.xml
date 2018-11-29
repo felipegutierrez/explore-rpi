@@ -54,6 +54,11 @@
 			<artifactId>edgent-providers-iot</artifactId>
 			<version>1.2.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.edgent</groupId>
+			<artifactId>edgent-analytics-math3</artifactId>
+			<version>1.2.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.pi4j</groupId>

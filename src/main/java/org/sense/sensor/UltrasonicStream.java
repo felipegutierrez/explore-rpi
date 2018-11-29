@@ -42,7 +42,7 @@ public class UltrasonicStream implements Supplier<Double> {
 	@Override
 	public Double get() {
 		try {
-			System.out.print("Distance in centimeters: ");
+			// System.out.print("Distance in centimeters: ");
 			currentDistance = getDistance();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
