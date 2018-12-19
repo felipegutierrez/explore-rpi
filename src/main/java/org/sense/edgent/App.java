@@ -3,6 +3,7 @@ package org.sense.edgent;
 import java.util.Scanner;
 
 import org.sense.edgent.app.TempSensorApp;
+import org.sense.edgent.app.TempSensorMqttApp;
 import org.sense.edgent.app.TempSensorWindowApp;
 import org.sense.edgent.app.UltrasonicApp;
 import org.sense.edgent.app.UltrasonicEdgentApp;
@@ -19,6 +20,7 @@ public class App {
 			System.out.println("3 - Ultrasonic sensor filter with Apache Edgent");
 			System.out.println("4 - Ultrasonic sensor window average with Apache Edgent");
 			System.out.println("5 - TempSensor window average with Apache Edgent");
+			System.out.println("6 - TempSensor MQTT connector with Apache Edgent");
 			System.out.print("    Please enter which application you want to run: ");
 
 			String msg = (new Scanner(System.in)).nextLine();
@@ -50,6 +52,13 @@ public class App {
 			case 5:
 				System.out.println("App 5 selected");
 				new TempSensorWindowApp();
+				app = 0;
+				break;
+			case 6:
+				System.out.println("App 6 selected");
+				System.out.println(
+						"Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-edgent' to receive values from the mqtt publisher");
+				new TempSensorMqttApp();
 				app = 0;
 				break;
 			default:
