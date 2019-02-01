@@ -3,6 +3,7 @@ package org.sense.edgent;
 import java.util.Scanner;
 
 import org.sense.edgent.app.AdaptableFilterRangeApp;
+import org.sense.edgent.app.TempMultipleSensorMqttApp;
 import org.sense.edgent.app.TempSensorApp;
 import org.sense.edgent.app.TempSensorMqttApp;
 import org.sense.edgent.app.TempSensorUnionMqttApp;
@@ -25,6 +26,7 @@ public class App {
 			System.out.println("6 - TempSensor MQTT connector with Apache Edgent");
 			System.out.println("7 - TempSensor union MQTT connector with Apache Edgent");
 			System.out.println("8 - TempSensor adaptive filter MQTT connector with Apache Edgent");
+			System.out.println("9 - Multiple temperature sensors using MQTT connector with Edgent");
 			System.out.print("    Please enter which application you want to run: ");
 
 			String msg = (new Scanner(System.in)).nextLine();
@@ -75,6 +77,13 @@ public class App {
 				System.out.println("use 'mosquitto_pub -h 127.0.0.1 -t topic-parameter -m \"[70.0..120.0]\"' ");
 				System.out.println("on the terminal to change the parameters at runtime.");
 				new AdaptableFilterRangeApp();
+				app = 0;
+				break;
+			case 9:
+				System.out.println("App 9 (Multiple temperature sensors) selected");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-edgent' ");
+				System.out.println("to receive values from the mqtt publisher");
+				new TempMultipleSensorMqttApp();
 				app = 0;
 				break;
 			default:
