@@ -22,6 +22,16 @@ public class TempSensorId implements Supplier<Tuple2<Integer, Double>> {
 		// Change the current temperature some random amount
 		double newTemp = rand.nextGaussian() + currentTemp;
 		currentTemp = newTemp;
+
+		// Enable this to test fake values
+		// if (id.equals(1) || id.equals(2) || id.equals(3)) {
+		// currentTemp = 40.0;
+		// } else if (id.equals(4) || id.equals(5) || id.equals(6)) {
+		// currentTemp = 50.0;
+		// } else if (id.equals(7) || id.equals(8) || id.equals(9)) {
+		// currentTemp = 60.0;
+		// }
+
 		return new Tuple2<Integer, Double>(id, currentTemp);
 	}
 }

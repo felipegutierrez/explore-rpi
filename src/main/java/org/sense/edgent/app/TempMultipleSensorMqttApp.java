@@ -45,25 +45,25 @@ public class TempMultipleSensorMqttApp {
 		TStream<String> temp02Readings = topology.poll(sensor02, 1000, TimeUnit.MILLISECONDS).map(p -> {
 			return String.valueOf(p.f0) + "|" + String.valueOf(p.f1);
 		});
-		TStream<String> temp03Readings = topology.poll(sensor03, 1250, TimeUnit.MILLISECONDS).map(p -> {
+		TStream<String> temp03Readings = topology.poll(sensor03, 1000, TimeUnit.MILLISECONDS).map(p -> {
 			return String.valueOf(p.f0) + "|" + String.valueOf(p.f1);
 		});
-		TStream<String> temp04Readings = topology.poll(sensor04, 1500, TimeUnit.MILLISECONDS).map(p -> {
+		TStream<String> temp04Readings = topology.poll(sensor04, 2900, TimeUnit.MILLISECONDS).map(p -> {
 			return String.valueOf(p.f0) + "|" + String.valueOf(p.f1);
 		});
-		TStream<String> temp05Readings = topology.poll(sensor05, 1750, TimeUnit.MILLISECONDS).map(p -> {
+		TStream<String> temp05Readings = topology.poll(sensor05, 3000, TimeUnit.MILLISECONDS).map(p -> {
 			return String.valueOf(p.f0) + "|" + String.valueOf(p.f1);
 		});
-		TStream<String> temp06Readings = topology.poll(sensor06, 2000, TimeUnit.MILLISECONDS).map(p -> {
+		TStream<String> temp06Readings = topology.poll(sensor06, 3500, TimeUnit.MILLISECONDS).map(p -> {
 			return String.valueOf(p.f0) + "|" + String.valueOf(p.f1);
 		});
-		TStream<String> temp07Readings = topology.poll(sensor07, 2250, TimeUnit.MILLISECONDS).map(p -> {
+		TStream<String> temp07Readings = topology.poll(sensor07, 5500, TimeUnit.MILLISECONDS).map(p -> {
 			return String.valueOf(p.f0) + "|" + String.valueOf(p.f1);
 		});
-		TStream<String> temp08Readings = topology.poll(sensor08, 2500, TimeUnit.MILLISECONDS).map(p -> {
+		TStream<String> temp08Readings = topology.poll(sensor08, 6000, TimeUnit.MILLISECONDS).map(p -> {
 			return String.valueOf(p.f0) + "|" + String.valueOf(p.f1);
 		});
-		TStream<String> temp09Readings = topology.poll(sensor09, 2750, TimeUnit.MILLISECONDS).map(p -> {
+		TStream<String> temp09Readings = topology.poll(sensor09, 7000, TimeUnit.MILLISECONDS).map(p -> {
 			return String.valueOf(p.f0) + "|" + String.valueOf(p.f1);
 		});
 
