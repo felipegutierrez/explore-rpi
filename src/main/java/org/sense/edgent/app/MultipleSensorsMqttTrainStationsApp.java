@@ -4,14 +4,17 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.edgent.connectors.mqtt.MqttConfig;
 import org.apache.edgent.connectors.mqtt.MqttStreams;
+import org.apache.edgent.function.Function;
 import org.apache.edgent.providers.direct.DirectProvider;
 import org.apache.edgent.topology.TSink;
 import org.apache.edgent.topology.TStream;
 import org.apache.edgent.topology.Topology;
+import org.apache.flink.api.java.tuple.Tuple2;
 import org.sense.sensor.CounterSensor;
 import org.sense.sensor.LiftVibrationSensor;
 import org.sense.sensor.TemperatureSensor;
 import org.sense.util.Platform;
+import org.sense.util.SensorKey;
 import org.sense.util.SensorType;
 import org.sense.util.Station;
 
@@ -51,52 +54,24 @@ public class MultipleSensorsMqttTrainStationsApp {
 		MqttConfig config = new MqttConfig("tcp://127.0.0.1:1883", "TempMultipleSensorMqttApp");
 		MqttStreams mqtt = new MqttStreams(topology, () -> config);
 
+		// @formatter:off
 		// receive values from 5 different sources
-		TStream<String> sensor01Readings = topology.poll(sensor01, 1000, TimeUnit.MILLISECONDS).map(p -> {
-			return p.f0.toString() + "|" + String.valueOf(p.f1);
-		});
-		TStream<String> sensor02Readings = topology.poll(sensor02, 1000, TimeUnit.MILLISECONDS).map(p -> {
-			return p.f0.toString() + "|" + String.valueOf(p.f1);
-		});
-		TStream<String> sensor03Readings = topology.poll(sensor03, 1000, TimeUnit.MILLISECONDS).map(p -> {
-			return p.f0.toString() + "|" + String.valueOf(p.f1);
-		});
-		TStream<String> sensor04Readings = topology.poll(sensor04, 1000, TimeUnit.MILLISECONDS).map(p -> {
-			return p.f0.toString() + "|" + String.valueOf(p.f1);
-		});
-		TStream<String> sensor05Readings = topology.poll(sensor05, 1000, TimeUnit.MILLISECONDS).map(p -> {
-			return p.f0.toString() + "|" + String.valueOf(p.f1);
-		});
-		TStream<String> sensor06Readings = topology.poll(sensor06, 1000, TimeUnit.MILLISECONDS).map(p -> {
-			return p.f0.toString() + "|" + String.valueOf(p.f1);
-		});
-		TStream<String> sensor07Readings = topology.poll(sensor07, 2000, TimeUnit.MILLISECONDS).map(p -> {
-			return p.f0.toString() + "|" + String.valueOf(p.f1);
-		});
-		TStream<String> sensor08Readings = topology.poll(sensor08, 2000, TimeUnit.MILLISECONDS).map(p -> {
-			return p.f0.toString() + "|" + String.valueOf(p.f1);
-		});
-		TStream<String> sensor09Readings = topology.poll(sensor09, 2000, TimeUnit.MILLISECONDS).map(p -> {
-			return p.f0.toString() + "|" + String.valueOf(p.f1);
-		});
-		TStream<String> sensor10Readings = topology.poll(sensor10, 3000, TimeUnit.MILLISECONDS).map(p -> {
-			return p.f0.toString() + "|" + String.valueOf(p.f1);
-		});
-		TStream<String> sensor11Readings = topology.poll(sensor11, 3000, TimeUnit.MILLISECONDS).map(p -> {
-			return p.f0.toString() + "|" + String.valueOf(p.f1);
-		});
-		TStream<String> sensor12Readings = topology.poll(sensor12, 5000, TimeUnit.MILLISECONDS).map(p -> {
-			return p.f0.toString() + "|" + String.valueOf(p.f1);
-		});
-		TStream<String> sensor13Readings = topology.poll(sensor13, 5000, TimeUnit.MILLISECONDS).map(p -> {
-			return p.f0.toString() + "|" + String.valueOf(p.f1);
-		});
-		TStream<String> sensor14Readings = topology.poll(sensor14, 1000, TimeUnit.MILLISECONDS).map(p -> {
-			return p.f0.toString() + "|" + String.valueOf(p.f1);
-		});
-		TStream<String> sensor15Readings = topology.poll(sensor15, 1000, TimeUnit.MILLISECONDS).map(p -> {
-			return p.f0.toString() + "|" + String.valueOf(p.f1);
-		});
+		TStream<String> sensor01Readings = topology.poll(sensor01, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor02Readings = topology.poll(sensor02, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor03Readings = topology.poll(sensor03, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor04Readings = topology.poll(sensor04, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor05Readings = topology.poll(sensor05, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor06Readings = topology.poll(sensor06, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor07Readings = topology.poll(sensor07, 2000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor08Readings = topology.poll(sensor08, 2000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor09Readings = topology.poll(sensor09, 2000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor10Readings = topology.poll(sensor10, 3000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor11Readings = topology.poll(sensor11, 3000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor12Readings = topology.poll(sensor12, 5000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor13Readings = topology.poll(sensor13, 5000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor14Readings = topology.poll(sensor14, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor15Readings = topology.poll(sensor15, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		// @formatter:on
 
 		// @formatter:off
 		TStream<String> tempReadingsStation01 = sensor01Readings
@@ -119,5 +94,25 @@ public class MultipleSensorsMqttTrainStationsApp {
 		TSink<String> sink = mqtt.publish(tempReadingsStation01, "topic-station-01", qos, retain);
 
 		dp.submit(topology);
+	}
+
+	public static class SensorDoubleMapper implements Function<Tuple2<SensorKey, Double>, String> {
+
+		private static final long serialVersionUID = -183900884352862695L;
+
+		@Override
+		public String apply(Tuple2<SensorKey, Double> value) {
+			return value.f0.toString() + "|" + String.valueOf(value.f1);
+		}
+	}
+
+	public static class SensorIntMapper implements Function<Tuple2<SensorKey, Integer>, String> {
+
+		private static final long serialVersionUID = 5478136460473668449L;
+
+		@Override
+		public String apply(Tuple2<SensorKey, Integer> value) {
+			return value.f0.toString() + "|" + String.valueOf(value.f1);
+		}
 	}
 }
