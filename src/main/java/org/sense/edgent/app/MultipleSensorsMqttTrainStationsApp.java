@@ -45,6 +45,24 @@ public class MultipleSensorsMqttTrainStationsApp {
 		CounterSensor sensor13 = new CounterSensor(13, SensorType.COUNTER_TRAINS, new Platform(2, new Station(1)));
 		CounterSensor sensor14 = new CounterSensor(14, SensorType.COUNTER_TICKETS, new Platform(null, new Station(1)));
 		CounterSensor sensor15 = new CounterSensor(15, SensorType.COUNTER_PEOPLE, new Platform(null, new Station(1)));
+		// Sensor at train station 02
+		TemperatureSensor sensor16 = new TemperatureSensor(16, new Platform(1, new Station(2)));
+		TemperatureSensor sensor17 = new TemperatureSensor(17, new Platform(1, new Station(2)));
+		TemperatureSensor sensor18 = new TemperatureSensor(18, new Platform(2, new Station(2)));
+		TemperatureSensor sensor19 = new TemperatureSensor(19, new Platform(2, new Station(2)));
+		TemperatureSensor sensor20 = new TemperatureSensor(20, new Platform(3, new Station(2)));
+		TemperatureSensor sensor21 = new TemperatureSensor(21, new Platform(3, new Station(2)));
+		LiftVibrationSensor sensor22 = new LiftVibrationSensor(22, new Platform(1, new Station(2)));
+		LiftVibrationSensor sensor23 = new LiftVibrationSensor(23, new Platform(2, new Station(2)));
+		LiftVibrationSensor sensor24 = new LiftVibrationSensor(24, new Platform(3, new Station(2)));
+		CounterSensor sensor25 = new CounterSensor(25, SensorType.COUNTER_PEOPLE, new Platform(1, new Station(2)));
+		CounterSensor sensor26 = new CounterSensor(26, SensorType.COUNTER_PEOPLE, new Platform(2, new Station(2)));
+		CounterSensor sensor27 = new CounterSensor(27, SensorType.COUNTER_PEOPLE, new Platform(3, new Station(2)));
+		CounterSensor sensor28 = new CounterSensor(28, SensorType.COUNTER_TRAINS, new Platform(1, new Station(2)));
+		CounterSensor sensor29 = new CounterSensor(29, SensorType.COUNTER_TRAINS, new Platform(2, new Station(2)));
+		CounterSensor sensor30 = new CounterSensor(30, SensorType.COUNTER_TRAINS, new Platform(3, new Station(2)));
+		CounterSensor sensor31 = new CounterSensor(31, SensorType.COUNTER_TICKETS, new Platform(null, new Station(2)));
+		CounterSensor sensor32 = new CounterSensor(32, SensorType.COUNTER_PEOPLE, new Platform(null, new Station(2)));
 
 		DirectProvider dp = new DirectProvider();
 		Topology topology = dp.newTopology();
@@ -55,7 +73,7 @@ public class MultipleSensorsMqttTrainStationsApp {
 		MqttStreams mqtt = new MqttStreams(topology, () -> config);
 
 		// @formatter:off
-		// receive values from 5 different sources
+		// train station 01
 		TStream<String> sensor01Readings = topology.poll(sensor01, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
 		TStream<String> sensor02Readings = topology.poll(sensor02, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
 		TStream<String> sensor03Readings = topology.poll(sensor03, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
@@ -71,6 +89,24 @@ public class MultipleSensorsMqttTrainStationsApp {
 		TStream<String> sensor13Readings = topology.poll(sensor13, 5000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		TStream<String> sensor14Readings = topology.poll(sensor14, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		TStream<String> sensor15Readings = topology.poll(sensor15, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		// train station 02
+		TStream<String> sensor16Readings = topology.poll(sensor16, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor17Readings = topology.poll(sensor17, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor18Readings = topology.poll(sensor18, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor19Readings = topology.poll(sensor19, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor20Readings = topology.poll(sensor20, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor21Readings = topology.poll(sensor21, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor22Readings = topology.poll(sensor22, 2000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor23Readings = topology.poll(sensor23, 2000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor24Readings = topology.poll(sensor24, 2000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor25Readings = topology.poll(sensor25, 3000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor26Readings = topology.poll(sensor26, 3000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor27Readings = topology.poll(sensor27, 5000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor28Readings = topology.poll(sensor28, 5000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor29Readings = topology.poll(sensor29, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor30Readings = topology.poll(sensor30, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor31Readings = topology.poll(sensor31, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor32Readings = topology.poll(sensor32, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		// @formatter:on
 
 		// @formatter:off
@@ -89,9 +125,27 @@ public class MultipleSensorsMqttTrainStationsApp {
 				.union(sensor13Readings)
 				.union(sensor14Readings)
 				.union(sensor15Readings);
+		TStream<String> tempReadingsStation02 = sensor16Readings
+				.union(sensor17Readings)
+				.union(sensor18Readings)
+				.union(sensor19Readings)
+				.union(sensor20Readings)
+				.union(sensor21Readings)
+				.union(sensor22Readings)
+				.union(sensor23Readings)
+				.union(sensor24Readings)
+				.union(sensor25Readings)
+				.union(sensor26Readings)
+				.union(sensor27Readings)
+				.union(sensor28Readings)
+				.union(sensor29Readings)
+				.union(sensor30Readings)
+				.union(sensor31Readings)
+				.union(sensor32Readings);
 		// @formatter:on
 
-		TSink<String> sink = mqtt.publish(tempReadingsStation01, "topic-station-01", qos, retain);
+		TSink<String> sink01 = mqtt.publish(tempReadingsStation01, "topic-station-01", qos, retain);
+		TSink<String> sink02 = mqtt.publish(tempReadingsStation02, "topic-station-02", qos, retain);
 
 		dp.submit(topology);
 	}
