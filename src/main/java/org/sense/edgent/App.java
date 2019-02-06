@@ -3,6 +3,7 @@ package org.sense.edgent;
 import java.util.Scanner;
 
 import org.sense.edgent.app.AdaptableFilterRangeApp;
+import org.sense.edgent.app.MultipleSensorsMqttTrainStationsApp;
 import org.sense.edgent.app.TempMultipleSensorMqttApp;
 import org.sense.edgent.app.TempSensorApp;
 import org.sense.edgent.app.TempSensorMqttApp;
@@ -17,19 +18,33 @@ public class App {
 
 		int app = 0;
 		do {
-			System.out.println("0 - exit");
-			System.out.println("1 - TempSensor using Apache Edgent");
-			System.out.println("2 - Ultrasonic sensor raw implementation");
-			System.out.println("3 - Ultrasonic sensor filter with Apache Edgent");
-			System.out.println("4 - Ultrasonic sensor window average with Apache Edgent");
-			System.out.println("5 - TempSensor window average with Apache Edgent");
-			System.out.println("6 - TempSensor MQTT connector with Apache Edgent");
-			System.out.println("7 - TempSensor union MQTT connector with Apache Edgent");
-			System.out.println("8 - TempSensor adaptive filter MQTT connector with Apache Edgent");
-			System.out.println("9 - Multiple temperature sensors using MQTT connector with Edgent");
-			System.out.print("    Please enter which application you want to run: ");
+			// @formatter:off
+			System.out.println("0  - exit");
+			System.out.println("1  - TempSensor using Apache Edgent");
+			System.out.println("2  - Ultrasonic sensor raw implementation");
+			System.out.println("3  - Ultrasonic sensor filter with Apache Edgent");
+			System.out.println("4  - Ultrasonic sensor window average with Apache Edgent");
+			System.out.println("5  - TempSensor window average with Apache Edgent");
+			System.out.println("6  - TempSensor MQTT connector with Apache Edgent");
+			System.out.println("7  - TempSensor union MQTT connector with Apache Edgent");
+			System.out.println("8  - TempSensor adaptive filter MQTT connector with Apache Edgent");
+			System.out.println("9  - Multiple temperature sensors using MQTT connector with Edgent");
+			System.out.println("10 - Multiple sensors on train stations using MQTT connector with Edgent");
+			// @formatter:on
 
-			String msg = (new Scanner(System.in)).nextLine();
+			String msg = "0";
+			if (args != null && args.length > 0) {
+				msg = args[0];
+				if (msg.matches("-?\\d+")) {
+					System.out.println("    Application choosed: " + msg);
+				} else {
+					msg = "999";
+				}
+			} else {
+				System.out.print("     Please enter which application you want to run: ");
+				msg = (new Scanner(System.in)).nextLine();
+			}
+
 			app = Integer.valueOf(msg);
 			switch (app) {
 			case 0:
@@ -84,6 +99,12 @@ public class App {
 				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-edgent' ");
 				System.out.println("to receive values from the mqtt publisher");
 				new TempMultipleSensorMqttApp();
+				app = 0;
+				break;
+			case 10:
+				System.out.println("App 10 (Multiple sensors on train stations) selected");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-01' ");
+				new MultipleSensorsMqttTrainStationsApp();
 				app = 0;
 				break;
 			default:
