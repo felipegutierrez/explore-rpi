@@ -29,7 +29,7 @@ public class Station {
 
 	@Override
 	public String toString() {
-		return "Station [id=" + id + ", platforms=" + platforms + "]";
+		return id + "|" + platforms;
 	}
 
 }

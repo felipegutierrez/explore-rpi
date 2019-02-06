@@ -38,7 +38,7 @@ public class SensorKey {
 
 	@Override
 	public String toString() {
-		return "SensorKey [id=" + id + ", sensorType=" + sensorType + ", platform=" + platform + "]";
+		return id + "|" + sensorType + "|" + platform + "|";
 	}
 
 }
