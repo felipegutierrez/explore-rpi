@@ -7,6 +7,9 @@ public class SensorKey {
 	private Platform platform;
 
 	public SensorKey(Integer id, SensorType sensorType, Platform platform) {
+		if (sensorType == null) {
+			System.out.println("Please set the sensor type.");
+		}
 		this.id = id;
 		this.sensorType = sensorType;
 		this.platform = platform;
@@ -38,7 +41,6 @@ public class SensorKey {
 
 	@Override
 	public String toString() {
-		return id + "|" + sensorType + "|" + platform;
+		return id + "|" + sensorType.getValue() + "|" + platform;
 	}
-
 }

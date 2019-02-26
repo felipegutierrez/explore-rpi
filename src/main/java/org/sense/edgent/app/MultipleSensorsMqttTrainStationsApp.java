@@ -6,7 +6,6 @@ import org.apache.edgent.connectors.mqtt.MqttConfig;
 import org.apache.edgent.connectors.mqtt.MqttStreams;
 import org.apache.edgent.function.Function;
 import org.apache.edgent.providers.direct.DirectProvider;
-import org.apache.edgent.topology.TSink;
 import org.apache.edgent.topology.TStream;
 import org.apache.edgent.topology.Topology;
 import org.apache.flink.api.java.tuple.Tuple2;
@@ -14,6 +13,7 @@ import org.sense.sensor.CounterSensor;
 import org.sense.sensor.LiftVibrationSensor;
 import org.sense.sensor.TemperatureSensor;
 import org.sense.util.Platform;
+import org.sense.util.PlatformType;
 import org.sense.util.SensorKey;
 import org.sense.util.SensorType;
 import org.sense.util.Station;
@@ -29,40 +29,42 @@ public class MultipleSensorsMqttTrainStationsApp {
 
 	public MultipleSensorsMqttTrainStationsApp() {
 
+		// @formatter:off
 		// Sensor at train station 01
-		TemperatureSensor sensor01 = new TemperatureSensor(1, new Platform(1, new Station(1)));
-		TemperatureSensor sensor02 = new TemperatureSensor(2, new Platform(1, new Station(1)));
-		TemperatureSensor sensor03 = new TemperatureSensor(3, new Platform(1, new Station(1)));
-		TemperatureSensor sensor04 = new TemperatureSensor(4, new Platform(2, new Station(1)));
-		TemperatureSensor sensor05 = new TemperatureSensor(5, new Platform(2, new Station(1)));
-		TemperatureSensor sensor06 = new TemperatureSensor(6, new Platform(2, new Station(1)));
-		LiftVibrationSensor sensor07 = new LiftVibrationSensor(7, new Platform(1, new Station(1)));
-		LiftVibrationSensor sensor08 = new LiftVibrationSensor(8, new Platform(2, new Station(1)));
-		LiftVibrationSensor sensor09 = new LiftVibrationSensor(9, new Platform(2, new Station(1)));
-		CounterSensor sensor10 = new CounterSensor(10, SensorType.COUNTER_PEOPLE, new Platform(1, new Station(1)));
-		CounterSensor sensor11 = new CounterSensor(11, SensorType.COUNTER_PEOPLE, new Platform(2, new Station(1)));
-		CounterSensor sensor12 = new CounterSensor(12, SensorType.COUNTER_TRAINS, new Platform(1, new Station(1)));
-		CounterSensor sensor13 = new CounterSensor(13, SensorType.COUNTER_TRAINS, new Platform(2, new Station(1)));
-		CounterSensor sensor14 = new CounterSensor(14, SensorType.COUNTER_TICKETS, new Platform(null, new Station(1)));
-		CounterSensor sensor15 = new CounterSensor(15, SensorType.COUNTER_PEOPLE, new Platform(null, new Station(1)));
+		TemperatureSensor sensor01 = new TemperatureSensor(1, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
+		TemperatureSensor sensor02 = new TemperatureSensor(2, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
+		TemperatureSensor sensor03 = new TemperatureSensor(3, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
+		TemperatureSensor sensor04 = new TemperatureSensor(4, new Platform(2, PlatformType.CITY, new Station(1)));
+		TemperatureSensor sensor05 = new TemperatureSensor(5, new Platform(2, PlatformType.CITY, new Station(1)));
+		TemperatureSensor sensor06 = new TemperatureSensor(6, new Platform(2, PlatformType.CITY, new Station(1)));
+		LiftVibrationSensor sensor07 = new LiftVibrationSensor(7, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
+		LiftVibrationSensor sensor08 = new LiftVibrationSensor(8, new Platform(2, PlatformType.CITY, new Station(1)));
+		LiftVibrationSensor sensor09 = new LiftVibrationSensor(9, new Platform(2, PlatformType.CITY, new Station(1)));
+		CounterSensor sensor10 = new CounterSensor(10, SensorType.COUNTER_PEOPLE, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
+		CounterSensor sensor11 = new CounterSensor(11, SensorType.COUNTER_PEOPLE, new Platform(2, PlatformType.CITY, new Station(1)));
+		CounterSensor sensor12 = new CounterSensor(12, SensorType.COUNTER_TRAINS, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
+		CounterSensor sensor13 = new CounterSensor(13, SensorType.COUNTER_TRAINS, new Platform(2, PlatformType.CITY, new Station(1)));
+		CounterSensor sensor14 = new CounterSensor(14, SensorType.COUNTER_TICKETS, new Platform(null, PlatformType.UNDEFINED, new Station(1)));
+		CounterSensor sensor15 = new CounterSensor(15, SensorType.COUNTER_PEOPLE, new Platform(null, PlatformType.UNDEFINED, new Station(1)));
 		// Sensor at train station 02
-		TemperatureSensor sensor16 = new TemperatureSensor(16, new Platform(1, new Station(2)));
-		TemperatureSensor sensor17 = new TemperatureSensor(17, new Platform(1, new Station(2)));
-		TemperatureSensor sensor18 = new TemperatureSensor(18, new Platform(2, new Station(2)));
-		TemperatureSensor sensor19 = new TemperatureSensor(19, new Platform(2, new Station(2)));
-		TemperatureSensor sensor20 = new TemperatureSensor(20, new Platform(3, new Station(2)));
-		TemperatureSensor sensor21 = new TemperatureSensor(21, new Platform(3, new Station(2)));
-		LiftVibrationSensor sensor22 = new LiftVibrationSensor(22, new Platform(1, new Station(2)));
-		LiftVibrationSensor sensor23 = new LiftVibrationSensor(23, new Platform(2, new Station(2)));
-		LiftVibrationSensor sensor24 = new LiftVibrationSensor(24, new Platform(3, new Station(2)));
-		CounterSensor sensor25 = new CounterSensor(25, SensorType.COUNTER_PEOPLE, new Platform(1, new Station(2)));
-		CounterSensor sensor26 = new CounterSensor(26, SensorType.COUNTER_PEOPLE, new Platform(2, new Station(2)));
-		CounterSensor sensor27 = new CounterSensor(27, SensorType.COUNTER_PEOPLE, new Platform(3, new Station(2)));
-		CounterSensor sensor28 = new CounterSensor(28, SensorType.COUNTER_TRAINS, new Platform(1, new Station(2)));
-		CounterSensor sensor29 = new CounterSensor(29, SensorType.COUNTER_TRAINS, new Platform(2, new Station(2)));
-		CounterSensor sensor30 = new CounterSensor(30, SensorType.COUNTER_TRAINS, new Platform(3, new Station(2)));
-		CounterSensor sensor31 = new CounterSensor(31, SensorType.COUNTER_TICKETS, new Platform(null, new Station(2)));
-		CounterSensor sensor32 = new CounterSensor(32, SensorType.COUNTER_PEOPLE, new Platform(null, new Station(2)));
+		TemperatureSensor sensor16 = new TemperatureSensor(16, new Platform(1, PlatformType.CITY, new Station(2)));
+		TemperatureSensor sensor17 = new TemperatureSensor(17, new Platform(1, PlatformType.CITY, new Station(2)));
+		TemperatureSensor sensor18 = new TemperatureSensor(18, new Platform(2, PlatformType.REGIONAL, new Station(2)));
+		TemperatureSensor sensor19 = new TemperatureSensor(19, new Platform(2, PlatformType.REGIONAL, new Station(2)));
+		TemperatureSensor sensor20 = new TemperatureSensor(20, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
+		TemperatureSensor sensor21 = new TemperatureSensor(21, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
+		LiftVibrationSensor sensor22 = new LiftVibrationSensor(22, new Platform(1, PlatformType.CITY, new Station(2)));
+		LiftVibrationSensor sensor23 = new LiftVibrationSensor(23, new Platform(2, PlatformType.REGIONAL, new Station(2)));
+		LiftVibrationSensor sensor24 = new LiftVibrationSensor(24, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
+		CounterSensor sensor25 = new CounterSensor(25, SensorType.COUNTER_PEOPLE, new Platform(1, PlatformType.CITY, new Station(2)));
+		CounterSensor sensor26 = new CounterSensor(26, SensorType.COUNTER_PEOPLE, new Platform(2, PlatformType.REGIONAL, new Station(2)));
+		CounterSensor sensor27 = new CounterSensor(27, SensorType.COUNTER_PEOPLE, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
+		CounterSensor sensor28 = new CounterSensor(28, SensorType.COUNTER_TRAINS, new Platform(1, PlatformType.CITY, new Station(2)));
+		CounterSensor sensor29 = new CounterSensor(29, SensorType.COUNTER_TRAINS, new Platform(2, PlatformType.REGIONAL, new Station(2)));
+		CounterSensor sensor30 = new CounterSensor(30, SensorType.COUNTER_TRAINS, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
+		CounterSensor sensor31 = new CounterSensor(31, SensorType.COUNTER_TICKETS, new Platform(null, PlatformType.UNDEFINED, new Station(2)));
+		CounterSensor sensor32 = new CounterSensor(32, SensorType.COUNTER_PEOPLE, new Platform(null, PlatformType.UNDEFINED, new Station(2)));
+		// @formatter:on
 
 		DirectProvider dp = new DirectProvider();
 		Topology topology = dp.newTopology();
@@ -142,10 +144,15 @@ public class MultipleSensorsMqttTrainStationsApp {
 				.union(sensor30Readings)
 				.union(sensor31Readings)
 				.union(sensor32Readings);
+		
+		// tempReadingsStation01.print();
+		// tempReadingsStation02.print();
+		// TSink<String> sink01 = mqtt.publish(tempReadingsStation01, "topic-station-01", qos, retain);
+		// TSink<String> sink02 = mqtt.publish(tempReadingsStation02, "topic-station-02", qos, retain);
 		// @formatter:on
 
-		TSink<String> sink01 = mqtt.publish(tempReadingsStation01, "topic-station-01", qos, retain);
-		TSink<String> sink02 = mqtt.publish(tempReadingsStation02, "topic-station-02", qos, retain);
+		mqtt.publish(tempReadingsStation01, "topic-station-01", qos, retain);
+		mqtt.publish(tempReadingsStation02, "topic-station-02", qos, retain);
 
 		dp.submit(topology);
 	}

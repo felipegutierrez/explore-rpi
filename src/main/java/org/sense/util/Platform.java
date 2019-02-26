@@ -4,10 +4,15 @@ public class Platform {
 
 	private Integer id;
 	private Station station;
+	private PlatformType platformType;
 
-	public Platform(Integer id, Station station) {
+	public Platform(Integer id, PlatformType platformType, Station station) {
+		if (platformType == null) {
+			System.out.println("Please set the platform type.");
+		}
 		this.id = id;
 		this.station = station;
+		this.platformType = platformType;
 	}
 
 	public Integer getId() {
@@ -26,9 +31,16 @@ public class Platform {
 		this.station = station;
 	}
 
-	@Override
-	public String toString() {
-		return id + "|" + station;
+	public PlatformType getPlatformType() {
+		return platformType;
 	}
 
+	public void setPlatformType(PlatformType platformType) {
+		this.platformType = platformType;
+	}
+
+	@Override
+	public String toString() {
+		return id + "|" + platformType.getValue() + "|" + station;
+	}
 }

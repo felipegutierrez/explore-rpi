@@ -29,7 +29,7 @@ public class Station {
 
 	@Override
 	public String toString() {
-		return id + "|" + platforms;
+		// return id + "|" + platforms;
+		return String.valueOf(id);
 	}
-
 }
