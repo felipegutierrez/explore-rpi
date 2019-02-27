@@ -28,8 +28,14 @@ public class CounterSensor implements Supplier<Tuple2<SensorKey, Integer>> {
 	@Override
 	public Tuple2<SensorKey, Integer> get() {
 		// Change the current value some random amount
-		currentValue = randomGenerator.nextInt(200) + 1;
-
+		if (SensorType.COUNTER_PEOPLE.equals(key.getSensorType())
+				|| SensorType.COUNTER_TICKETS.equals(key.getSensorType())) {
+			currentValue = randomGenerator.nextInt(200) + 1;
+		} else if (SensorType.COUNTER_TRAINS.equals(key.getSensorType())) {
+			currentValue = randomGenerator.nextInt(5) + 1;
+		} else {
+			currentValue = 0;
+		}
 		return Tuple2.of(key, currentValue);
 	}
 }
