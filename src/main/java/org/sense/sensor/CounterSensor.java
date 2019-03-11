@@ -25,14 +25,18 @@ public class CounterSensor implements Supplier<Tuple2<SensorKey, Integer>> {
 		this.randomGenerator = new Random();
 	}
 
+	/**
+	 * This generates random numbers between 1 to 500 people or tickets, or between
+	 * 1 to 3 trains.
+	 */
 	@Override
 	public Tuple2<SensorKey, Integer> get() {
 		// Change the current value some random amount
 		if (SensorType.COUNTER_PEOPLE.equals(key.getSensorType())
 				|| SensorType.COUNTER_TICKETS.equals(key.getSensorType())) {
-			currentValue = randomGenerator.nextInt(200) + 1;
+			currentValue = randomGenerator.nextInt(500) + 1;
 		} else if (SensorType.COUNTER_TRAINS.equals(key.getSensorType())) {
-			currentValue = randomGenerator.nextInt(5) + 1;
+			currentValue = randomGenerator.nextInt(3) + 1;
 		} else {
 			currentValue = 0;
 		}

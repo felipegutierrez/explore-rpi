@@ -3,6 +3,7 @@ package org.sense.edgent;
 import java.util.Scanner;
 
 import org.sense.edgent.app.AdaptableFilterRangeApp;
+import org.sense.edgent.app.MultipleSensorsAndStreamsMqttTrainStationsApp;
 import org.sense.edgent.app.MultipleSensorsMqttTrainStationsApp;
 import org.sense.edgent.app.TempMultipleSensorMqttApp;
 import org.sense.edgent.app.TempSensorApp;
@@ -30,6 +31,7 @@ public class App {
 			System.out.println("8  - TempSensor adaptive filter MQTT connector with Apache Edgent");
 			System.out.println("9  - Multiple temperature sensors using MQTT connector with Edgent");
 			System.out.println("10 - Multiple sensors on train stations using MQTT connector with Edgent");
+			System.out.println("11 - Multiple sensors and streams on train stations using MQTT connector with Edgent");
 			// @formatter:on
 
 			String msg = "0";
@@ -45,6 +47,7 @@ public class App {
 				msg = (new Scanner(System.in)).nextLine();
 			}
 
+			// @formatter:off
 			app = Integer.valueOf(msg);
 			switch (app) {
 			case 0:
@@ -107,10 +110,26 @@ public class App {
 				new MultipleSensorsMqttTrainStationsApp();
 				app = 0;
 				break;
+			case 11:
+				System.out.println("App 11 (Multiple sensors and streams on train stations) selected");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-01-temp' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-01-lift' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-01-people' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-01-trains' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-01-tickets' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-02-temp' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-02-lift' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-02-people' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-02-trains' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-02-tickets' ");
+				new MultipleSensorsAndStreamsMqttTrainStationsApp();
+				app = 0;
+				break;
 			default:
 				System.out.println("No application selected [" + app + "] ");
 				break;
 			}
+			// @formatter:on
 		} while (app != 0);
 	}
 }
