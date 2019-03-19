@@ -35,12 +35,16 @@ public class App {
 			// @formatter:on
 
 			String msg = "0";
+			String ipAddress = null;
 			if (args != null && args.length > 0) {
 				msg = args[0];
 				if (msg.matches("-?\\d+")) {
 					System.out.println("    Application choosed: " + msg);
 				} else {
 					msg = "999";
+				}
+				if (args.length > 1) {
+					ipAddress = args[1];
 				}
 			} else {
 				System.out.print("     Please enter which application you want to run: ");
@@ -112,17 +116,20 @@ public class App {
 				break;
 			case 11:
 				System.out.println("App 11 (Multiple sensors and streams on train stations) selected");
-				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-01-temp' ");
-				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-01-lift' ");
-				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-01-people' ");
-				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-01-trains' ");
-				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-01-tickets' ");
-				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-02-temp' ");
-				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-02-lift' ");
-				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-02-people' ");
-				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-02-trains' ");
-				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-02-tickets' ");
-				new MultipleSensorsAndStreamsMqttTrainStationsApp();
+				if (ipAddress == null) {
+					ipAddress = "127.0.0.1";
+				}
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-01-temp' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-01-lift' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-01-people' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-01-trains' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-01-tickets' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-02-temp' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-02-lift' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-02-people' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-02-trains' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-02-tickets' ");
+				new MultipleSensorsAndStreamsMqttTrainStationsApp(ipAddress, "1883");
 				app = 0;
 				break;
 			default:
