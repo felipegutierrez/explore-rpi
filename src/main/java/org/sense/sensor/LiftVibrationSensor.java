@@ -1,14 +1,15 @@
 package org.sense.sensor;
 
+import java.util.Calendar;
 import java.util.Random;
 
 import org.apache.edgent.function.Supplier;
-import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.api.java.tuple.Tuple3;
 import org.sense.util.Platform;
 import org.sense.util.SensorKey;
 import org.sense.util.SensorType;
 
-public class LiftVibrationSensor implements Supplier<Tuple2<SensorKey, Double>> {
+public class LiftVibrationSensor implements Supplier<Tuple3<SensorKey, Long, Double>> {
 
 	private static final long serialVersionUID = 9213215518155576444L;
 	private SensorKey key;
@@ -26,7 +27,7 @@ public class LiftVibrationSensor implements Supplier<Tuple2<SensorKey, Double>> 
 	}
 
 	@Override
-	public Tuple2<SensorKey, Double> get() {
+	public Tuple3<SensorKey, Long, Double> get() {
 		// Change the current temperature some random amount
 		double newTemp = rand.nextGaussian() + currentTemp;
 		currentTemp = newTemp;
@@ -42,6 +43,6 @@ public class LiftVibrationSensor implements Supplier<Tuple2<SensorKey, Double>> 
 		}
 		// @formatter:on
 
-		return new Tuple2<SensorKey, Double>(key, currentTemp);
+		return new Tuple3<SensorKey, Long, Double>(key, Calendar.getInstance().getTimeInMillis(), currentTemp);
 	}
 }

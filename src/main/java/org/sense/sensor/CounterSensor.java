@@ -1,14 +1,15 @@
 package org.sense.sensor;
 
+import java.util.Calendar;
 import java.util.Random;
 
 import org.apache.edgent.function.Supplier;
-import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.api.java.tuple.Tuple3;
 import org.sense.util.Platform;
 import org.sense.util.SensorKey;
 import org.sense.util.SensorType;
 
-public class CounterSensor implements Supplier<Tuple2<SensorKey, Integer>> {
+public class CounterSensor implements Supplier<Tuple3<SensorKey, Long, Integer>> {
 
 	private static final long serialVersionUID = -900693619248120949L;
 	private SensorKey key;
@@ -30,7 +31,7 @@ public class CounterSensor implements Supplier<Tuple2<SensorKey, Integer>> {
 	 * 1 to 3 trains.
 	 */
 	@Override
-	public Tuple2<SensorKey, Integer> get() {
+	public Tuple3<SensorKey, Long, Integer> get() {
 		// Change the current value some random amount
 		if (SensorType.COUNTER_PEOPLE.equals(key.getSensorType())
 				|| SensorType.COUNTER_TICKETS.equals(key.getSensorType())) {
@@ -40,6 +41,6 @@ public class CounterSensor implements Supplier<Tuple2<SensorKey, Integer>> {
 		} else {
 			currentValue = 0;
 		}
-		return Tuple2.of(key, currentValue);
+		return Tuple3.of(key, Calendar.getInstance().getTimeInMillis(), currentValue);
 	}
 }

@@ -8,7 +8,7 @@ import org.apache.edgent.function.Function;
 import org.apache.edgent.providers.direct.DirectProvider;
 import org.apache.edgent.topology.TStream;
 import org.apache.edgent.topology.Topology;
-import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.api.java.tuple.Tuple3;
 import org.sense.sensor.CounterSensor;
 import org.sense.sensor.LiftVibrationSensor;
 import org.sense.sensor.TemperatureSensor;
@@ -156,23 +156,23 @@ public class MultipleSensorsAndStreamsMqttTrainStationsApp {
 		dp.submit(topology);
 	}
 
-	public static class SensorDoubleMapper implements Function<Tuple2<SensorKey, Double>, String> {
+	public static class SensorDoubleMapper implements Function<Tuple3<SensorKey, Long, Double>, String> {
 
 		private static final long serialVersionUID = -183900884352862695L;
 
 		@Override
-		public String apply(Tuple2<SensorKey, Double> value) {
-			return value.f0.toString() + "|" + String.valueOf(value.f1);
+		public String apply(Tuple3<SensorKey, Long, Double> value) {
+			return value.f0.toString() + "|" + String.valueOf(value.f1) + "|" + String.valueOf(value.f2);
 		}
 	}
 
-	public static class SensorIntMapper implements Function<Tuple2<SensorKey, Integer>, String> {
+	public static class SensorIntMapper implements Function<Tuple3<SensorKey, Long, Integer>, String> {
 
 		private static final long serialVersionUID = 5478136460473668449L;
 
 		@Override
-		public String apply(Tuple2<SensorKey, Integer> value) {
-			return value.f0.toString() + "|" + String.valueOf(value.f1);
+		public String apply(Tuple3<SensorKey, Long, Integer> value) {
+			return value.f0.toString() + "|" + String.valueOf(value.f1) + "|" + String.valueOf(value.f2);
 		}
 	}
 }
