@@ -71,8 +71,9 @@ public class MultipleSensorsMqttTrainStationsApp {
 		CounterSensor sensor32 = new CounterSensor(32, SensorType.COUNTER_TRAINS, new Platform(1, PlatformType.CITY, new Station(2)));
 		CounterSensor sensor33 = new CounterSensor(33, SensorType.COUNTER_TRAINS, new Platform(2, PlatformType.REGIONAL, new Station(2)));
 		CounterSensor sensor34 = new CounterSensor(34, SensorType.COUNTER_TRAINS, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
-		CounterSensor sensor35 = new CounterSensor(35, SensorType.COUNTER_TICKETS, new Platform(null, PlatformType.UNDEFINED, new Station(2)));
-		CounterSensor sensor36 = new CounterSensor(36, SensorType.COUNTER_PEOPLE, new Platform(null, PlatformType.UNDEFINED, new Station(2)));
+		CounterSensor sensor35 = new CounterSensor(35, SensorType.COUNTER_TICKETS, new Platform(1, PlatformType.CITY, new Station(2)));
+		CounterSensor sensor36 = new CounterSensor(36, SensorType.COUNTER_TICKETS, new Platform(2, PlatformType.REGIONAL, new Station(2)));
+		CounterSensor sensor37 = new CounterSensor(37, SensorType.COUNTER_TICKETS, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
 		// @formatter:on
 
 		DirectProvider dp = new DirectProvider();
@@ -121,6 +122,7 @@ public class MultipleSensorsMqttTrainStationsApp {
 		TStream<String> sensor34Readings = topology.poll(sensor34, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		TStream<String> sensor35Readings = topology.poll(sensor35, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		TStream<String> sensor36Readings = topology.poll(sensor36, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor37Readings = topology.poll(sensor37, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		// @formatter:on
 
 		// @formatter:off
@@ -157,7 +159,8 @@ public class MultipleSensorsMqttTrainStationsApp {
 				.union(sensor33Readings)
 				.union(sensor34Readings)
 				.union(sensor35Readings)
-				.union(sensor36Readings);
+				.union(sensor36Readings)
+				.union(sensor37Readings);
 		
 		// tempReadingsStation01.print();
 		// tempReadingsStation02.print();
