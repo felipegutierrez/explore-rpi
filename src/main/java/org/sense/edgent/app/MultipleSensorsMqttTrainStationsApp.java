@@ -27,7 +27,14 @@ import org.sense.util.Station;
  */
 public class MultipleSensorsMqttTrainStationsApp {
 
+	private String ipAddress = "127.0.0.1";
+	private String port = "1883";
+
 	public MultipleSensorsMqttTrainStationsApp() {
+		this("127.0.0.1", "1883");
+	}
+
+	public MultipleSensorsMqttTrainStationsApp(String ipAddress, String port) {
 
 		// @formatter:off
 		// Sensor at train station 01
@@ -73,7 +80,8 @@ public class MultipleSensorsMqttTrainStationsApp {
 
 		int qos = 0;
 		boolean retain = false;
-		MqttConfig config = new MqttConfig("tcp://127.0.0.1:1883", "TempMultipleSensorMqttApp");
+		MqttConfig config = new MqttConfig("tcp://" + this.ipAddress + ":" + this.port,
+				"MultipleSensorsMqttTrainStationsApp");
 		MqttStreams mqtt = new MqttStreams(topology, () -> config);
 
 		// @formatter:off

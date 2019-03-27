@@ -110,8 +110,12 @@ public class App {
 				break;
 			case 10:
 				System.out.println("App 10 (Multiple sensors on train stations) selected");
-				System.out.println("Open a terminal and type: 'mosquitto_sub -h 127.0.0.1 -t topic-station-01' ");
-				new MultipleSensorsMqttTrainStationsApp();
+				if (ipAddress == null) {
+					ipAddress = "127.0.0.1";
+				}
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-01' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-02' ");
+				new MultipleSensorsMqttTrainStationsApp(ipAddress, "1883");
 				app = 0;
 				break;
 			case 11:
