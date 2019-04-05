@@ -2,6 +2,7 @@ package org.sense.edgent;
 
 import java.util.Scanner;
 
+import org.apache.log4j.BasicConfigurator;
 import org.sense.edgent.app.AdaptableFilterRangeApp;
 import org.sense.edgent.app.MultipleSensorsAndStreamsMqttTrainStationsApp;
 import org.sense.edgent.app.MultipleSensorsMqttTrainStationsApp;
@@ -16,6 +17,8 @@ import org.sense.edgent.app.UltrasonicEdgentWindowApp;
 
 public class App {
 	public static void main(String[] args) throws Exception {
+
+		BasicConfigurator.configure();
 
 		int app = 0;
 		do {
@@ -115,6 +118,7 @@ public class App {
 				}
 				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-01' ");
 				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-02' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t \'#\'");
 				new MultipleSensorsMqttTrainStationsApp(ipAddress, "1883");
 				app = 0;
 				break;
@@ -133,6 +137,7 @@ public class App {
 				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-02-people' ");
 				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-02-trains' ");
 				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-02-tickets' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t \'#\'");
 				new MultipleSensorsAndStreamsMqttTrainStationsApp(ipAddress, "1883");
 				app = 0;
 				break;

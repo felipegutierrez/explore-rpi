@@ -38,42 +38,42 @@ public class MultipleSensorsMqttTrainStationsApp {
 
 		// @formatter:off
 		// Sensor at train station 01
-		TemperatureSensor sensor01 = new TemperatureSensor(1, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
-		TemperatureSensor sensor02 = new TemperatureSensor(2, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
-		TemperatureSensor sensor03 = new TemperatureSensor(3, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
-		TemperatureSensor sensor04 = new TemperatureSensor(4, new Platform(2, PlatformType.CITY, new Station(1)));
-		TemperatureSensor sensor05 = new TemperatureSensor(5, new Platform(2, PlatformType.CITY, new Station(1)));
-		TemperatureSensor sensor06 = new TemperatureSensor(6, new Platform(2, PlatformType.CITY, new Station(1)));
-		LiftVibrationSensor sensor07 = new LiftVibrationSensor(7, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
-		LiftVibrationSensor sensor08 = new LiftVibrationSensor(8, new Platform(2, PlatformType.CITY, new Station(1)));
-		LiftVibrationSensor sensor09 = new LiftVibrationSensor(9, new Platform(2, PlatformType.CITY, new Station(1)));
-		CounterSensor sensor10 = new CounterSensor(10, SensorType.COUNTER_PEOPLE, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
-		CounterSensor sensor11 = new CounterSensor(11, SensorType.COUNTER_PEOPLE, new Platform(2, PlatformType.CITY, new Station(1)));
-		CounterSensor sensor12 = new CounterSensor(12, SensorType.COUNTER_TRAINS, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
-		CounterSensor sensor13 = new CounterSensor(13, SensorType.COUNTER_TRAINS, new Platform(2, PlatformType.CITY, new Station(1)));
-		CounterSensor sensor14 = new CounterSensor(14, SensorType.COUNTER_TICKETS, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
-		CounterSensor sensor15 = new CounterSensor(15, SensorType.COUNTER_TICKETS, new Platform(2, PlatformType.CITY, new Station(1)));
-		CounterSensor sensor16 = new CounterSensor(16, SensorType.COUNTER_PEOPLE, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
-		CounterSensor sensor17 = new CounterSensor(17, SensorType.COUNTER_PEOPLE, new Platform(2, PlatformType.CITY, new Station(1)));
+		TemperatureSensor sensor01Temp = new TemperatureSensor(1, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
+		TemperatureSensor sensor02Temp = new TemperatureSensor(2, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
+		TemperatureSensor sensor03Temp = new TemperatureSensor(3, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
+		TemperatureSensor sensor04Temp = new TemperatureSensor(4, new Platform(2, PlatformType.CITY, new Station(1)));
+		TemperatureSensor sensor05Temp = new TemperatureSensor(5, new Platform(2, PlatformType.CITY, new Station(1)));
+		TemperatureSensor sensor06Temp = new TemperatureSensor(6, new Platform(2, PlatformType.CITY, new Station(1)));
+		LiftVibrationSensor sensor07Lift = new LiftVibrationSensor(7, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
+		LiftVibrationSensor sensor08Lift = new LiftVibrationSensor(8, new Platform(2, PlatformType.CITY, new Station(1)));
+		LiftVibrationSensor sensor09Lift = new LiftVibrationSensor(9, new Platform(2, PlatformType.CITY, new Station(1)));
+		CounterSensor sensor10People = new CounterSensor(10, SensorType.COUNTER_PEOPLE, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
+		CounterSensor sensor11People = new CounterSensor(11, SensorType.COUNTER_PEOPLE, new Platform(2, PlatformType.CITY, new Station(1)));
+		CounterSensor sensor12Trains = new CounterSensor(12, SensorType.COUNTER_TRAINS, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
+		CounterSensor sensor13Trains = new CounterSensor(13, SensorType.COUNTER_TRAINS, new Platform(2, PlatformType.CITY, new Station(1)));
+		CounterSensor sensor14Tickets = new CounterSensor(14, SensorType.COUNTER_TICKETS, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
+		CounterSensor sensor15Tickets = new CounterSensor(15, SensorType.COUNTER_TICKETS, new Platform(2, PlatformType.CITY, new Station(1)));
+		// CounterSensor sensor16People = new CounterSensor(16, SensorType.COUNTER_PEOPLE, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
+		// CounterSensor sensor17People = new CounterSensor(17, SensorType.COUNTER_PEOPLE, new Platform(2, PlatformType.CITY, new Station(1)));
 		// Sensor at train station 02
-		TemperatureSensor sensor20 = new TemperatureSensor(20, new Platform(1, PlatformType.CITY, new Station(2)));
-		TemperatureSensor sensor21 = new TemperatureSensor(21, new Platform(1, PlatformType.CITY, new Station(2)));
-		TemperatureSensor sensor22 = new TemperatureSensor(22, new Platform(2, PlatformType.REGIONAL, new Station(2)));
-		TemperatureSensor sensor23 = new TemperatureSensor(23, new Platform(2, PlatformType.REGIONAL, new Station(2)));
-		TemperatureSensor sensor24 = new TemperatureSensor(24, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
-		TemperatureSensor sensor25 = new TemperatureSensor(25, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
-		LiftVibrationSensor sensor26 = new LiftVibrationSensor(26, new Platform(1, PlatformType.CITY, new Station(2)));
-		LiftVibrationSensor sensor27 = new LiftVibrationSensor(27, new Platform(2, PlatformType.REGIONAL, new Station(2)));
-		LiftVibrationSensor sensor28 = new LiftVibrationSensor(28, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
-		CounterSensor sensor29 = new CounterSensor(29, SensorType.COUNTER_PEOPLE, new Platform(1, PlatformType.CITY, new Station(2)));
-		CounterSensor sensor30 = new CounterSensor(30, SensorType.COUNTER_PEOPLE, new Platform(2, PlatformType.REGIONAL, new Station(2)));
-		CounterSensor sensor31 = new CounterSensor(31, SensorType.COUNTER_PEOPLE, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
-		CounterSensor sensor32 = new CounterSensor(32, SensorType.COUNTER_TRAINS, new Platform(1, PlatformType.CITY, new Station(2)));
-		CounterSensor sensor33 = new CounterSensor(33, SensorType.COUNTER_TRAINS, new Platform(2, PlatformType.REGIONAL, new Station(2)));
-		CounterSensor sensor34 = new CounterSensor(34, SensorType.COUNTER_TRAINS, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
-		CounterSensor sensor35 = new CounterSensor(35, SensorType.COUNTER_TICKETS, new Platform(1, PlatformType.CITY, new Station(2)));
-		CounterSensor sensor36 = new CounterSensor(36, SensorType.COUNTER_TICKETS, new Platform(2, PlatformType.REGIONAL, new Station(2)));
-		CounterSensor sensor37 = new CounterSensor(37, SensorType.COUNTER_TICKETS, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
+		TemperatureSensor sensor20Temp = new TemperatureSensor(20, new Platform(1, PlatformType.CITY, new Station(2)));
+		TemperatureSensor sensor21Temp = new TemperatureSensor(21, new Platform(1, PlatformType.CITY, new Station(2)));
+		TemperatureSensor sensor22Temp = new TemperatureSensor(22, new Platform(2, PlatformType.REGIONAL, new Station(2)));
+		TemperatureSensor sensor23Temp = new TemperatureSensor(23, new Platform(2, PlatformType.REGIONAL, new Station(2)));
+		TemperatureSensor sensor24Temp = new TemperatureSensor(24, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
+		TemperatureSensor sensor25Temp = new TemperatureSensor(25, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
+		LiftVibrationSensor sensor26Lift = new LiftVibrationSensor(26, new Platform(1, PlatformType.CITY, new Station(2)));
+		LiftVibrationSensor sensor27Lift = new LiftVibrationSensor(27, new Platform(2, PlatformType.REGIONAL, new Station(2)));
+		LiftVibrationSensor sensor28Lift = new LiftVibrationSensor(28, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
+		CounterSensor sensor29People = new CounterSensor(29, SensorType.COUNTER_PEOPLE, new Platform(1, PlatformType.CITY, new Station(2)));
+		CounterSensor sensor30People = new CounterSensor(30, SensorType.COUNTER_PEOPLE, new Platform(2, PlatformType.REGIONAL, new Station(2)));
+		CounterSensor sensor31People = new CounterSensor(31, SensorType.COUNTER_PEOPLE, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
+		CounterSensor sensor32Trains = new CounterSensor(32, SensorType.COUNTER_TRAINS, new Platform(1, PlatformType.CITY, new Station(2)));
+		CounterSensor sensor33Trains = new CounterSensor(33, SensorType.COUNTER_TRAINS, new Platform(2, PlatformType.REGIONAL, new Station(2)));
+		CounterSensor sensor34Trains = new CounterSensor(34, SensorType.COUNTER_TRAINS, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
+		CounterSensor sensor35Tickets = new CounterSensor(35, SensorType.COUNTER_TICKETS, new Platform(1, PlatformType.CITY, new Station(2)));
+		CounterSensor sensor36Tickets = new CounterSensor(36, SensorType.COUNTER_TICKETS, new Platform(2, PlatformType.REGIONAL, new Station(2)));
+		CounterSensor sensor37Tickets = new CounterSensor(37, SensorType.COUNTER_TICKETS, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
 		// @formatter:on
 
 		DirectProvider dp = new DirectProvider();
@@ -87,81 +87,83 @@ public class MultipleSensorsMqttTrainStationsApp {
 
 		// @formatter:off
 		// train station 01
-		TStream<String> sensor01Readings = topology.poll(sensor01, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor02Readings = topology.poll(sensor02, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor03Readings = topology.poll(sensor03, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor04Readings = topology.poll(sensor04, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor05Readings = topology.poll(sensor05, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor06Readings = topology.poll(sensor06, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor07Readings = topology.poll(sensor07, 2000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor08Readings = topology.poll(sensor08, 2000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor09Readings = topology.poll(sensor09, 2000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor10Readings = topology.poll(sensor10, 3000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor11Readings = topology.poll(sensor11, 3000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor12Readings = topology.poll(sensor12, 5000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor13Readings = topology.poll(sensor13, 5000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor14Readings = topology.poll(sensor14, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor15Readings = topology.poll(sensor15, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor16Readings = topology.poll(sensor16, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor17Readings = topology.poll(sensor17, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor01ReadingsTemp = topology.poll(sensor01Temp, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor02ReadingsTemp = topology.poll(sensor02Temp, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor03ReadingsTemp = topology.poll(sensor03Temp, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor04ReadingsTemp = topology.poll(sensor04Temp, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor05ReadingsTemp = topology.poll(sensor05Temp, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor06ReadingsTemp = topology.poll(sensor06Temp, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor07ReadingsLift = topology.poll(sensor07Lift, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor08ReadingsLift = topology.poll(sensor08Lift, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor09ReadingsLift = topology.poll(sensor09Lift, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor10ReadingsPeople = topology.poll(sensor10People, 3000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor11ReadingsPeople = topology.poll(sensor11People, 20000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor12ReadingsTrains = topology.poll(sensor12Trains, 20000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor13ReadingsTrains = topology.poll(sensor13Trains, 20000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor14ReadingsTickets = topology.poll(sensor14Tickets, 3000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor15ReadingsTickets = topology.poll(sensor15Tickets, 20000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		// TStream<String> sensor16ReadingsPeople = topology.poll(sensor16People, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		// TStream<String> sensor17ReadingsPeople = topology.poll(sensor17People, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		// train station 02
-		TStream<String> sensor20Readings = topology.poll(sensor20, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor21Readings = topology.poll(sensor21, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor22Readings = topology.poll(sensor22, 2000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor23Readings = topology.poll(sensor23, 2000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor24Readings = topology.poll(sensor24, 2000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor25Readings = topology.poll(sensor25, 3000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor26Readings = topology.poll(sensor26, 3000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor27Readings = topology.poll(sensor27, 5000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor28Readings = topology.poll(sensor28, 5000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor29Readings = topology.poll(sensor29, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor30Readings = topology.poll(sensor30, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor31Readings = topology.poll(sensor31, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor32Readings = topology.poll(sensor32, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor33Readings = topology.poll(sensor33, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor34Readings = topology.poll(sensor34, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor35Readings = topology.poll(sensor35, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor36Readings = topology.poll(sensor36, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor37Readings = topology.poll(sensor37, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor20ReadingsTemp = topology.poll(sensor20Temp, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor21ReadingsTemp = topology.poll(sensor21Temp, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor22ReadingsTemp = topology.poll(sensor22Temp, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor23ReadingsTemp = topology.poll(sensor23Temp, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor24ReadingsTemp = topology.poll(sensor24Temp, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor25ReadingsTemp = topology.poll(sensor25Temp, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor26ReadingsLift = topology.poll(sensor26Lift, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor27ReadingsLift = topology.poll(sensor27Lift, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor28ReadingsLift = topology.poll(sensor28Lift, 20000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
+		TStream<String> sensor29ReadingsPeople = topology.poll(sensor29People, 3000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor30ReadingsPeople = topology.poll(sensor30People, 20000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor31ReadingsPeople = topology.poll(sensor31People, 20000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor32ReadingsTrains = topology.poll(sensor32Trains, 20000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor33ReadingsTrains = topology.poll(sensor33Trains, 20000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor34ReadingsTrains = topology.poll(sensor34Trains, 20000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor35ReadingsTickets = topology.poll(sensor35Tickets, 3000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor36ReadingsTickets = topology.poll(sensor36Tickets, 20000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor37ReadingsTickets = topology.poll(sensor37Tickets, 20000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		// @formatter:on
 
 		// @formatter:off
-		TStream<String> tempReadingsStation01 = sensor01Readings
-				.union(sensor02Readings)
-				.union(sensor03Readings)
-				.union(sensor04Readings)
-				.union(sensor05Readings)
-				.union(sensor06Readings)
-				.union(sensor07Readings)
-				.union(sensor08Readings)
-				.union(sensor09Readings)
-				.union(sensor10Readings)
-				.union(sensor11Readings)
-				.union(sensor12Readings)
-				.union(sensor13Readings)
-				.union(sensor14Readings)
-				.union(sensor15Readings)
-				.union(sensor16Readings)
-				.union(sensor17Readings);
-		TStream<String> tempReadingsStation02 = sensor20Readings
-				.union(sensor21Readings)
-				.union(sensor22Readings)
-				.union(sensor23Readings)
-				.union(sensor24Readings)
-				.union(sensor25Readings)
-				.union(sensor26Readings)
-				.union(sensor27Readings)
-				.union(sensor28Readings)
-				.union(sensor29Readings)
-				.union(sensor30Readings)
-				.union(sensor31Readings)
-				.union(sensor32Readings)
-				.union(sensor33Readings)
-				.union(sensor34Readings)
-				.union(sensor35Readings)
-				.union(sensor36Readings)
-				.union(sensor37Readings);
-		
+		TStream<String> tempReadingsStation01 = sensor01ReadingsTemp
+				.union(sensor02ReadingsTemp)
+				.union(sensor03ReadingsTemp)
+				.union(sensor04ReadingsTemp)
+				.union(sensor05ReadingsTemp)
+				.union(sensor06ReadingsTemp)
+				.union(sensor07ReadingsLift)
+				.union(sensor08ReadingsLift)
+				.union(sensor09ReadingsLift)
+				.union(sensor10ReadingsPeople)
+				.union(sensor11ReadingsPeople)
+				.union(sensor12ReadingsTrains)
+				.union(sensor13ReadingsTrains)
+				.union(sensor14ReadingsTickets)
+				.union(sensor15ReadingsTickets)
+				// .union(sensor16ReadingsPeople)
+				// .union(sensor17ReadingsPeople)
+				;
+		TStream<String> tempReadingsStation02 = sensor20ReadingsTemp
+				.union(sensor21ReadingsTemp)
+				.union(sensor22ReadingsTemp)
+				.union(sensor23ReadingsTemp)
+				.union(sensor24ReadingsTemp)
+				.union(sensor25ReadingsTemp)
+				.union(sensor26ReadingsLift)
+				.union(sensor27ReadingsLift)
+				.union(sensor28ReadingsLift)
+				.union(sensor29ReadingsPeople)
+				.union(sensor30ReadingsPeople)
+				.union(sensor31ReadingsPeople)
+				.union(sensor32ReadingsTrains)
+				.union(sensor33ReadingsTrains)
+				.union(sensor34ReadingsTrains)
+				.union(sensor35ReadingsTickets)
+				.union(sensor36ReadingsTickets)
+				.union(sensor37ReadingsTickets)
+				;
+
 		// tempReadingsStation01.print();
 		// tempReadingsStation02.print();
 		// TSink<String> sink01 = mqtt.publish(tempReadingsStation01, "topic-station-01", qos, retain);
