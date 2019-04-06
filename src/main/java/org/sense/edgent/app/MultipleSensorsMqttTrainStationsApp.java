@@ -9,6 +9,7 @@ import org.apache.edgent.providers.direct.DirectProvider;
 import org.apache.edgent.topology.TStream;
 import org.apache.edgent.topology.Topology;
 import org.apache.flink.api.java.tuple.Tuple3;
+import org.apache.flink.api.java.tuple.Tuple4;
 import org.sense.sensor.CounterSensor;
 import org.sense.sensor.LiftVibrationSensor;
 import org.sense.sensor.TemperatureSensor;
@@ -186,13 +187,14 @@ public class MultipleSensorsMqttTrainStationsApp {
 		}
 	}
 
-	public static class SensorIntMapper implements Function<Tuple3<SensorKey, Long, Integer>, String> {
+	public static class SensorIntMapper implements Function<Tuple4<SensorKey, Long, Integer, String>, String> {
 
 		private static final long serialVersionUID = 5478136460473668449L;
 
 		@Override
-		public String apply(Tuple3<SensorKey, Long, Integer> value) {
-			return value.f0.toString() + "|" + String.valueOf(value.f1) + "|" + String.valueOf(value.f2);
+		public String apply(Tuple4<SensorKey, Long, Integer, String> value) {
+			return value.f0.toString() + "|" + String.valueOf(value.f1) + "|" + String.valueOf(value.f2) + "|"
+					+ String.valueOf(value.f3);
 		}
 	}
 }
