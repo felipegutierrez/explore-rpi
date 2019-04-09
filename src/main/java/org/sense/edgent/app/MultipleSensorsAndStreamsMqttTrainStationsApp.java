@@ -87,7 +87,7 @@ public class MultipleSensorsAndStreamsMqttTrainStationsApp {
 		MqttStreams mqtt = new MqttStreams(topology, () -> config);
 
 		// @formatter:off
-		// train station 01
+		// train station 01 - generating normal data
 		// TStream<String> sensor01Readings = topology.poll(sensor01, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
 		// TStream<String> sensor02Readings = topology.poll(sensor02, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
 		// TStream<String> sensor03Readings = topology.poll(sensor03, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
@@ -105,7 +105,7 @@ public class MultipleSensorsAndStreamsMqttTrainStationsApp {
 		TStream<String> sensor15ReadingsTickets = topology.poll(sensor15Tickets, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		// TStream<String> sensor16Readings = topology.poll(sensor16, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		// TStream<String> sensor17Readings = topology.poll(sensor17, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		// train station 02
+		// train station 02 - generating data very skewed
 		// TStream<String> sensor20Readings = topology.poll(sensor20, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
 		// TStream<String> sensor21Readings = topology.poll(sensor21, 1000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
 		// TStream<String> sensor22Readings = topology.poll(sensor22, 2000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
@@ -122,8 +122,8 @@ public class MultipleSensorsAndStreamsMqttTrainStationsApp {
 		TStream<String> sensor33ReadingsTrains = topology.poll(sensor33Trains, 20000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		TStream<String> sensor34ReadingsTrains = topology.poll(sensor34Trains, 20000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		TStream<String> sensor35ReadingsTickets = topology.poll(sensor35Tickets, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor36ReadingsTickets = topology.poll(sensor36Tickets, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor37ReadingsTickets = topology.poll(sensor37Tickets, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor36ReadingsTickets = topology.poll(sensor36Tickets, 100, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor37ReadingsTickets = topology.poll(sensor37Tickets, 10, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 
 		// TStream<String> tempReadingsStation01Temp = sensor01Readings.union(sensor02Readings).union(sensor03Readings)
 		// 		.union(sensor04Readings).union(sensor05Readings).union(sensor06Readings);
