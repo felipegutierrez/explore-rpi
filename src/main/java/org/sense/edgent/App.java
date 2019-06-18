@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import org.apache.log4j.BasicConfigurator;
 import org.sense.edgent.app.AdaptableFilterRangeApp;
+import org.sense.edgent.app.CountingSensorsAndStreamsMqttTrainStationsApp;
 import org.sense.edgent.app.MultipleSensorsAndStreamsMqttTrainStationsApp;
 import org.sense.edgent.app.MultipleSensorsMqttTrainStationsApp;
 import org.sense.edgent.app.TempMultipleSensorMqttApp;
@@ -35,6 +36,7 @@ public class App {
 			System.out.println("9  - Multiple temperature sensors using MQTT connector with Edgent");
 			System.out.println("10 - Multiple sensors on train stations using MQTT connector with Edgent");
 			System.out.println("11 - Multiple sensors and streams on train stations using MQTT connector with Edgent");
+			System.out.println("12 - Counting people using MQTT connector with Edgent");
 			// @formatter:on
 
 			String msg = "0";
@@ -139,6 +141,19 @@ public class App {
 				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-02-tickets' ");
 				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t \'#\'");
 				new MultipleSensorsAndStreamsMqttTrainStationsApp(ipAddress, "1883");
+				app = 0;
+				break;
+			case 12:
+				System.out.println("App 12 (Counting people and tickets streams on train stations) selected");
+				if (ipAddress == null) {
+					ipAddress = "127.0.0.1";
+				}
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-01-people' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-01-tickets' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-02-people' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t topic-station-02-tickets' ");
+				System.out.println("Open a terminal and type: 'mosquitto_sub -h " + ipAddress + " -t \'#\'");
+				new CountingSensorsAndStreamsMqttTrainStationsApp(ipAddress, "1883");
 				app = 0;
 				break;
 			default:
