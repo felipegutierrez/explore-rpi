@@ -11,6 +11,7 @@ public class RandomScheduler {
 	private final BlockingQueue<Integer> queueTickets;
 	private final BlockingQueue<Integer> queueTrains;
 	private Random randomGenerator;
+	private Timer timer;
 
 	public RandomScheduler(int interval) {
 		this.queuePeople = new LinkedBlockingQueue<Integer>();
@@ -57,7 +58,7 @@ public class RandomScheduler {
 				}
 			}
 		};
-		Timer timer = new Timer(true);
+		this.timer = new Timer(true);
 		timer.schedule(task, 0, interval);
 	}
 
@@ -73,12 +74,17 @@ public class RandomScheduler {
 		return queueTrains;
 	}
 
+	public Timer getTimer() {
+		return timer;
+	}
+
 	public static void main(String[] args) throws InterruptedException {
 		RandomScheduler randomScheduler = new RandomScheduler(1000);
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 50; i++) {
 			Thread.sleep(250);
 			System.out.println("People[" + randomScheduler.queuePeople.peek() + "] Tickets["
 					+ randomScheduler.queueTickets.peek() + "] Trains[" + randomScheduler.queueTrains.peek() + "]");
 		}
+		randomScheduler.timer.cancel();
 	}
 }
