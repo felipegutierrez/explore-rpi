@@ -42,17 +42,21 @@ public class CounterSensor implements Supplier<Tuple4<SensorKey, Long, Integer, 
 	 */
 	@Override
 	public Tuple4<SensorKey, Long, Integer, String> get() {
-		// Change the current value some random amount
-		if (SensorType.COUNTER_PEOPLE.equals(key.getSensorType())) {
-			// currentValue = randomGenerator.nextInt(500) + 1;
-			currentValue = this.randomSchedulerGenerator.getQueuePeople().peek();
-		} else if (SensorType.COUNTER_TICKETS.equals(key.getSensorType())) {
-			currentValue = this.randomSchedulerGenerator.getQueueTickets().peek();
-		} else if (SensorType.COUNTER_TRAINS.equals(key.getSensorType())) {
-			// currentValue = randomGenerator.nextInt(3) + 1;
-			currentValue = this.randomSchedulerGenerator.getQueueTrains().peek();
-		} else {
-			currentValue = 0;
+		try {
+			// Change the current value some random amount
+			if (SensorType.COUNTER_PEOPLE.equals(key.getSensorType())) {
+				// currentValue = randomGenerator.nextInt(500) + 1;
+				currentValue = this.randomSchedulerGenerator.getQueuePeople().peek();
+			} else if (SensorType.COUNTER_TICKETS.equals(key.getSensorType())) {
+				currentValue = this.randomSchedulerGenerator.getQueueTickets().peek();
+			} else if (SensorType.COUNTER_TRAINS.equals(key.getSensorType())) {
+				// currentValue = randomGenerator.nextInt(3) + 1;
+				currentValue = this.randomSchedulerGenerator.getQueueTrains().peek();
+			} else {
+				currentValue = 0;
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 		String origin = randomCity.random().getValue();
 		String dest = randomCity.random().getValue();

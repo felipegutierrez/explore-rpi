@@ -63,15 +63,24 @@ public class RandomScheduler {
 		timer.schedule(task, 0, interval);
 	}
 
-	public BlockingQueue<Integer> getQueuePeople() {
-		return queuePeople;
+	public BlockingQueue<Integer> getQueuePeople() throws InterruptedException {
+		while (this.queuePeople.isEmpty()) {
+			Thread.sleep(100);
+		}
+		return this.queuePeople;
 	}
 
-	public BlockingQueue<Integer> getQueueTickets() {
+	public BlockingQueue<Integer> getQueueTickets() throws InterruptedException {
+		while (this.queueTickets.isEmpty()) {
+			Thread.sleep(100);
+		}
 		return queueTickets;
 	}
 
-	public BlockingQueue<Integer> getQueueTrains() {
+	public BlockingQueue<Integer> getQueueTrains() throws InterruptedException {
+		while (this.queueTrains.isEmpty()) {
+			Thread.sleep(100);
+		}
 		return queueTrains;
 	}
 
