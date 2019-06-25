@@ -33,7 +33,8 @@ public class RandomScheduler {
 						queueTrains.clear();
 					}
 					// generate random value to introduce error on the scheduling policy.
-					int random = randomGenerator.nextInt(11);
+					int random = randomGenerator.nextInt(11); // this value generates ERROR
+					// int random = 5; // this value is WITH NO ERROR
 					// System.out.print("scheduler assigned new value: ");
 					// System.out.println(random + " - " + ((random > 8) || (random < 2)));
 					int peopleAndTickets = Integer.valueOf(randomGenerator.nextInt(5000));

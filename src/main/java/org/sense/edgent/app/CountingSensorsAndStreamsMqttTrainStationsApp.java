@@ -34,15 +34,15 @@ public class CountingSensorsAndStreamsMqttTrainStationsApp {
 
 	public CountingSensorsAndStreamsMqttTrainStationsApp() {
 		this("127.0.0.1", "1883");
-		this.randomSchedulerGenerator01 = new RandomScheduler(2000);
-		this.randomSchedulerGenerator02 = new RandomScheduler(2000);
+		this.randomSchedulerGenerator01 = new RandomScheduler(20000);
+		this.randomSchedulerGenerator02 = new RandomScheduler(20000);
 	}
 
 	public CountingSensorsAndStreamsMqttTrainStationsApp(String ipAddress, String port) {
 		this.ipAddress = ipAddress;
 		this.port = port;
-		this.randomSchedulerGenerator01 = new RandomScheduler(2000);
-		this.randomSchedulerGenerator02 = new RandomScheduler(2000);
+		this.randomSchedulerGenerator01 = new RandomScheduler(20000);
+		this.randomSchedulerGenerator02 = new RandomScheduler(20000);
 
 		// @formatter:off
 		// Sensor at train station 01
