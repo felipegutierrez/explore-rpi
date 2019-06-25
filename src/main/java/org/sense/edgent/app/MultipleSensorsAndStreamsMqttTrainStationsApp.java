@@ -13,6 +13,7 @@ import org.apache.flink.api.java.tuple.Tuple4;
 import org.sense.sensor.CounterSensor;
 import org.sense.util.Platform;
 import org.sense.util.PlatformType;
+import org.sense.util.RandomScheduler;
 import org.sense.util.SensorKey;
 import org.sense.util.SensorType;
 import org.sense.util.Station;
@@ -28,14 +29,17 @@ public class MultipleSensorsAndStreamsMqttTrainStationsApp {
 
 	private String ipAddress = "127.0.0.1";
 	private String port = "1883";
+	private RandomScheduler randomSchedulerGenerator;
 
 	public MultipleSensorsAndStreamsMqttTrainStationsApp() {
 		this("127.0.0.1", "1883");
+		this.randomSchedulerGenerator = new RandomScheduler(2000);
 	}
 
 	public MultipleSensorsAndStreamsMqttTrainStationsApp(String ipAddress, String port) {
 		this.ipAddress = ipAddress;
 		this.port = port;
+		this.randomSchedulerGenerator = new RandomScheduler(2000);
 
 		// @formatter:off
 		// Sensor at train station 01
@@ -50,10 +54,10 @@ public class MultipleSensorsAndStreamsMqttTrainStationsApp {
 		// LiftVibrationSensor sensor09 = new LiftVibrationSensor(9, new Platform(2, PlatformType.CITY, new Station(1)));
 		// CounterSensor sensor10 = new CounterSensor(10, SensorType.COUNTER_PEOPLE, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
 		// CounterSensor sensor11 = new CounterSensor(11, SensorType.COUNTER_PEOPLE, new Platform(2, PlatformType.CITY, new Station(1)));
-		CounterSensor sensor12Trains = new CounterSensor(12, SensorType.COUNTER_TRAINS, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
-		CounterSensor sensor13Trains = new CounterSensor(13, SensorType.COUNTER_TRAINS, new Platform(2, PlatformType.CITY, new Station(1)));
-		CounterSensor sensor14Tickets = new CounterSensor(14, SensorType.COUNTER_TICKETS, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
-		CounterSensor sensor15Tickets = new CounterSensor(15, SensorType.COUNTER_TICKETS, new Platform(2, PlatformType.CITY, new Station(1)));
+		CounterSensor sensor12Trains = new CounterSensor(12, SensorType.COUNTER_TRAINS, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)), this.randomSchedulerGenerator);
+		CounterSensor sensor13Trains = new CounterSensor(13, SensorType.COUNTER_TRAINS, new Platform(2, PlatformType.CITY, new Station(1)), this.randomSchedulerGenerator);
+		CounterSensor sensor14Tickets = new CounterSensor(14, SensorType.COUNTER_TICKETS, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)), this.randomSchedulerGenerator);
+		CounterSensor sensor15Tickets = new CounterSensor(15, SensorType.COUNTER_TICKETS, new Platform(2, PlatformType.CITY, new Station(1)), this.randomSchedulerGenerator);
 		// CounterSensor sensor16 = new CounterSensor(16, SensorType.COUNTER_PEOPLE, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
 		// CounterSensor sensor17 = new CounterSensor(17, SensorType.COUNTER_PEOPLE, new Platform(2, PlatformType.CITY, new Station(1)));
 		// Sensor at train station 02
@@ -69,12 +73,12 @@ public class MultipleSensorsAndStreamsMqttTrainStationsApp {
 		// CounterSensor sensor29 = new CounterSensor(29, SensorType.COUNTER_PEOPLE, new Platform(1, PlatformType.CITY, new Station(2)));
 		// CounterSensor sensor30 = new CounterSensor(30, SensorType.COUNTER_PEOPLE, new Platform(2, PlatformType.REGIONAL, new Station(2)));
 		// CounterSensor sensor31 = new CounterSensor(31, SensorType.COUNTER_PEOPLE, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
-		CounterSensor sensor32Trains = new CounterSensor(32, SensorType.COUNTER_TRAINS, new Platform(1, PlatformType.CITY, new Station(2)));
-		CounterSensor sensor33Trains = new CounterSensor(33, SensorType.COUNTER_TRAINS, new Platform(2, PlatformType.REGIONAL, new Station(2)));
-		CounterSensor sensor34Trains = new CounterSensor(34, SensorType.COUNTER_TRAINS, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
-		CounterSensor sensor35Tickets = new CounterSensor(35, SensorType.COUNTER_TICKETS, new Platform(1, PlatformType.CITY, new Station(2)));
-		CounterSensor sensor36Tickets = new CounterSensor(36, SensorType.COUNTER_TICKETS, new Platform(2, PlatformType.REGIONAL, new Station(2)));
-		CounterSensor sensor37Tickets = new CounterSensor(37, SensorType.COUNTER_TICKETS, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
+		CounterSensor sensor32Trains = new CounterSensor(32, SensorType.COUNTER_TRAINS, new Platform(1, PlatformType.CITY, new Station(2)), this.randomSchedulerGenerator);
+		CounterSensor sensor33Trains = new CounterSensor(33, SensorType.COUNTER_TRAINS, new Platform(2, PlatformType.REGIONAL, new Station(2)), this.randomSchedulerGenerator);
+		CounterSensor sensor34Trains = new CounterSensor(34, SensorType.COUNTER_TRAINS, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)), this.randomSchedulerGenerator);
+		CounterSensor sensor35Tickets = new CounterSensor(35, SensorType.COUNTER_TICKETS, new Platform(1, PlatformType.CITY, new Station(2)), this.randomSchedulerGenerator);
+		CounterSensor sensor36Tickets = new CounterSensor(36, SensorType.COUNTER_TICKETS, new Platform(2, PlatformType.REGIONAL, new Station(2)), this.randomSchedulerGenerator);
+		CounterSensor sensor37Tickets = new CounterSensor(37, SensorType.COUNTER_TICKETS, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)), this.randomSchedulerGenerator);
 		// @formatter:on
 
 		DirectProvider dp = new DirectProvider();

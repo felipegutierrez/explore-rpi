@@ -1,0 +1,84 @@
+package org.sense.util;
+
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+public class RandomScheduler {
+	private final BlockingQueue<Integer> queuePeople;
+	private final BlockingQueue<Integer> queueTickets;
+	private final BlockingQueue<Integer> queueTrains;
+	private Random randomGenerator;
+
+	public RandomScheduler(int interval) {
+		this.queuePeople = new LinkedBlockingQueue<Integer>();
+		this.queueTickets = new LinkedBlockingQueue<Integer>();
+		this.queueTrains = new LinkedBlockingQueue<Integer>();
+		this.randomGenerator = new Random();
+
+		TimerTask task = new TimerTask() {
+			public void run() {
+				try {
+					// clean the queues
+					if (!queuePeople.isEmpty()) {
+						queuePeople.clear();
+					}
+					if (!queueTickets.isEmpty()) {
+						queueTickets.clear();
+					}
+					if (!queueTrains.isEmpty()) {
+						queueTrains.clear();
+					}
+					// generate random value to introduce error on the scheduling policy.
+					int random = randomGenerator.nextInt(11);
+					// System.out.print("scheduler assigned new value: ");
+					// System.out.println(random + " - " + ((random > 8) || (random < 2)));
+					int peopleAndTickets = Integer.valueOf(randomGenerator.nextInt(5000));
+
+					// add random values to the queues and introduce an error for values less than
+					// 20% or greater than 80%
+					if (random < 2) {
+						queuePeople.put(peopleAndTickets / 2);
+					} else if (random > 8) {
+						queuePeople.put(peopleAndTickets * 2);
+					} else {
+						queuePeople.put(peopleAndTickets);
+					}
+					queueTickets.put(peopleAndTickets);
+
+					// calculate the amount of trains based on the amount of people coming and
+					// tickets sold
+					int trains = (peopleAndTickets / 500) + 1;
+					queueTrains.put(trains);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		Timer timer = new Timer(true);
+		timer.schedule(task, 0, interval);
+	}
+
+	public BlockingQueue<Integer> getQueuePeople() {
+		return queuePeople;
+	}
+
+	public BlockingQueue<Integer> getQueueTickets() {
+		return queueTickets;
+	}
+
+	public BlockingQueue<Integer> getQueueTrains() {
+		return queueTrains;
+	}
+
+	public static void main(String[] args) throws InterruptedException {
+		RandomScheduler randomScheduler = new RandomScheduler(1000);
+		for (int i = 0; i < 100; i++) {
+			Thread.sleep(250);
+			System.out.println("People[" + randomScheduler.queuePeople.peek() + "] Tickets["
+					+ randomScheduler.queueTickets.peek() + "] Trains[" + randomScheduler.queueTrains.peek() + "]");
+		}
+	}
+}

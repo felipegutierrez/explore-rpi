@@ -13,6 +13,7 @@ import org.apache.flink.api.java.tuple.Tuple4;
 import org.sense.sensor.CounterSensor;
 import org.sense.util.Platform;
 import org.sense.util.PlatformType;
+import org.sense.util.RandomScheduler;
 import org.sense.util.SensorKey;
 import org.sense.util.SensorType;
 import org.sense.util.Station;
@@ -28,14 +29,20 @@ public class CountingSensorsAndStreamsMqttTrainStationsApp {
 
 	private String ipAddress = "127.0.0.1";
 	private String port = "1883";
+	private RandomScheduler randomSchedulerGenerator01;
+	private RandomScheduler randomSchedulerGenerator02;
 
 	public CountingSensorsAndStreamsMqttTrainStationsApp() {
 		this("127.0.0.1", "1883");
+		this.randomSchedulerGenerator01 = new RandomScheduler(2000);
+		this.randomSchedulerGenerator02 = new RandomScheduler(2000);
 	}
 
 	public CountingSensorsAndStreamsMqttTrainStationsApp(String ipAddress, String port) {
 		this.ipAddress = ipAddress;
 		this.port = port;
+		this.randomSchedulerGenerator01 = new RandomScheduler(2000);
+		this.randomSchedulerGenerator02 = new RandomScheduler(2000);
 
 		// @formatter:off
 		// Sensor at train station 01
@@ -48,12 +55,12 @@ public class CountingSensorsAndStreamsMqttTrainStationsApp {
 		// LiftVibrationSensor sensor07 = new LiftVibrationSensor(7, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
 		// LiftVibrationSensor sensor08 = new LiftVibrationSensor(8, new Platform(2, PlatformType.CITY, new Station(1)));
 		// LiftVibrationSensor sensor09 = new LiftVibrationSensor(9, new Platform(2, PlatformType.CITY, new Station(1)));
-		CounterSensor sensor10 = new CounterSensor(10, SensorType.COUNTER_PEOPLE, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
-		CounterSensor sensor11 = new CounterSensor(11, SensorType.COUNTER_PEOPLE, new Platform(2, PlatformType.CITY, new Station(1)));
+		CounterSensor sensor10People = new CounterSensor(10, SensorType.COUNTER_PEOPLE, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)), this.randomSchedulerGenerator01);
+		CounterSensor sensor11People = new CounterSensor(11, SensorType.COUNTER_PEOPLE, new Platform(2, PlatformType.CITY, new Station(1)), this.randomSchedulerGenerator01);
 		// CounterSensor sensor12Trains = new CounterSensor(12, SensorType.COUNTER_TRAINS, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
 		// CounterSensor sensor13Trains = new CounterSensor(13, SensorType.COUNTER_TRAINS, new Platform(2, PlatformType.CITY, new Station(1)));
-		CounterSensor sensor14Tickets = new CounterSensor(14, SensorType.COUNTER_TICKETS, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
-		CounterSensor sensor15Tickets = new CounterSensor(15, SensorType.COUNTER_TICKETS, new Platform(2, PlatformType.CITY, new Station(1)));
+		CounterSensor sensor14Tickets = new CounterSensor(14, SensorType.COUNTER_TICKETS, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)), this.randomSchedulerGenerator01);
+		CounterSensor sensor15Tickets = new CounterSensor(15, SensorType.COUNTER_TICKETS, new Platform(2, PlatformType.CITY, new Station(1)), this.randomSchedulerGenerator01);
 		// CounterSensor sensor16 = new CounterSensor(16, SensorType.COUNTER_PEOPLE, new Platform(1, PlatformType.INTERNATIONAL, new Station(1)));
 		// CounterSensor sensor17 = new CounterSensor(17, SensorType.COUNTER_PEOPLE, new Platform(2, PlatformType.CITY, new Station(1)));
 		// Sensor at train station 02
@@ -66,15 +73,15 @@ public class CountingSensorsAndStreamsMqttTrainStationsApp {
 		// LiftVibrationSensor sensor26 = new LiftVibrationSensor(26, new Platform(1, PlatformType.CITY, new Station(2)));
 		// LiftVibrationSensor sensor27 = new LiftVibrationSensor(27, new Platform(2, PlatformType.REGIONAL, new Station(2)));
 		// LiftVibrationSensor sensor28 = new LiftVibrationSensor(28, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
-		CounterSensor sensor29 = new CounterSensor(29, SensorType.COUNTER_PEOPLE, new Platform(1, PlatformType.CITY, new Station(2)));
-		CounterSensor sensor30 = new CounterSensor(30, SensorType.COUNTER_PEOPLE, new Platform(2, PlatformType.REGIONAL, new Station(2)));
-		CounterSensor sensor31 = new CounterSensor(31, SensorType.COUNTER_PEOPLE, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
+		CounterSensor sensor29People = new CounterSensor(29, SensorType.COUNTER_PEOPLE, new Platform(1, PlatformType.CITY, new Station(2)), this.randomSchedulerGenerator02);
+		CounterSensor sensor30People = new CounterSensor(30, SensorType.COUNTER_PEOPLE, new Platform(2, PlatformType.REGIONAL, new Station(2)), this.randomSchedulerGenerator02);
+		CounterSensor sensor31People = new CounterSensor(31, SensorType.COUNTER_PEOPLE, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)), this.randomSchedulerGenerator02);
 		// CounterSensor sensor32Trains = new CounterSensor(32, SensorType.COUNTER_TRAINS, new Platform(1, PlatformType.CITY, new Station(2)));
 		// CounterSensor sensor33Trains = new CounterSensor(33, SensorType.COUNTER_TRAINS, new Platform(2, PlatformType.REGIONAL, new Station(2)));
 		// CounterSensor sensor34Trains = new CounterSensor(34, SensorType.COUNTER_TRAINS, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
-		CounterSensor sensor35Tickets = new CounterSensor(35, SensorType.COUNTER_TICKETS, new Platform(1, PlatformType.CITY, new Station(2)));
-		CounterSensor sensor36Tickets = new CounterSensor(36, SensorType.COUNTER_TICKETS, new Platform(2, PlatformType.REGIONAL, new Station(2)));
-		CounterSensor sensor37Tickets = new CounterSensor(37, SensorType.COUNTER_TICKETS, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)));
+		CounterSensor sensor35Tickets = new CounterSensor(35, SensorType.COUNTER_TICKETS, new Platform(1, PlatformType.CITY, new Station(2)), this.randomSchedulerGenerator02);
+		CounterSensor sensor36Tickets = new CounterSensor(36, SensorType.COUNTER_TICKETS, new Platform(2, PlatformType.REGIONAL, new Station(2)), this.randomSchedulerGenerator02);
+		CounterSensor sensor37Tickets = new CounterSensor(37, SensorType.COUNTER_TICKETS, new Platform(3, PlatformType.INTERNATIONAL, new Station(2)), this.randomSchedulerGenerator02);
 		// @formatter:on
 
 		DirectProvider dp = new DirectProvider();
@@ -97,12 +104,12 @@ public class CountingSensorsAndStreamsMqttTrainStationsApp {
 		// TStream<String> sensor07Readings = topology.poll(sensor07, 2000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
 		// TStream<String> sensor08Readings = topology.poll(sensor08, 2000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
 		// TStream<String> sensor09Readings = topology.poll(sensor09, 2000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor10Readings = topology.poll(sensor10, 100, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor11Readings = topology.poll(sensor11, 10, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor10Readings = topology.poll(sensor10People, 100, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor11Readings = topology.poll(sensor11People, 100, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		// TStream<String> sensor12ReadingsTrains = topology.poll(sensor12Trains, 10000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		// TStream<String> sensor13ReadingsTrains = topology.poll(sensor13Trains, 10000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		TStream<String> sensor14ReadingsTickets = topology.poll(sensor14Tickets, 100, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor15ReadingsTickets = topology.poll(sensor15Tickets, 10, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor15ReadingsTickets = topology.poll(sensor15Tickets, 100, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		// TStream<String> sensor16Readings = topology.poll(sensor16, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		// TStream<String> sensor17Readings = topology.poll(sensor17, 1000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		// train station 02 - generating data very skewed
@@ -115,15 +122,15 @@ public class CountingSensorsAndStreamsMqttTrainStationsApp {
 		// TStream<String> sensor26Readings = topology.poll(sensor26, 3000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
 		// TStream<String> sensor27Readings = topology.poll(sensor27, 5000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
 		// TStream<String> sensor28Readings = topology.poll(sensor28, 5000, TimeUnit.MILLISECONDS).map(new SensorDoubleMapper());
-		TStream<String> sensor29Readings = topology.poll(sensor29, 100, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor30Readings = topology.poll(sensor30, 10, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor31Readings = topology.poll(sensor31, 1, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor29Readings = topology.poll(sensor29People, 100, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor30Readings = topology.poll(sensor30People, 100, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor31Readings = topology.poll(sensor31People, 100, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		// TStream<String> sensor32ReadingsTrains = topology.poll(sensor32Trains, 20000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		// TStream<String> sensor33ReadingsTrains = topology.poll(sensor33Trains, 20000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		// TStream<String> sensor34ReadingsTrains = topology.poll(sensor34Trains, 20000, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 		TStream<String> sensor35ReadingsTickets = topology.poll(sensor35Tickets, 100, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor36ReadingsTickets = topology.poll(sensor36Tickets, 10, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
-		TStream<String> sensor37ReadingsTickets = topology.poll(sensor37Tickets, 1, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor36ReadingsTickets = topology.poll(sensor36Tickets, 100, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
+		TStream<String> sensor37ReadingsTickets = topology.poll(sensor37Tickets, 100, TimeUnit.MILLISECONDS).map(new SensorIntMapper());
 
 		// TStream<String> tempReadingsStation01Temp = sensor01Readings.union(sensor02Readings).union(sensor03Readings)
 		// 		.union(sensor04Readings).union(sensor05Readings).union(sensor06Readings);
