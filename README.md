@@ -14,7 +14,7 @@ This project is to have fun with Raspberry Pi's and Apache Edgent.
 
 ## Execution
 
-Create a jar file `mvn package` and execute it on your Raspberry Pi: `java -jar explore-pi.jar`. Or execute the jar file already with the parameters, e.g.: `java -jar target/explore-rpi.jar 11 192.168.56.1`.
+Create a jar file `mvn package` and execute it on your Raspberry Pi: `java -jar target/explore-rpi.jar`. Or execute the jar file already with the parameters, e.g.: `java -jar target/explore-rpi.jar 11 192.168.56.1`.
 
 ## Troubleshooting
 
