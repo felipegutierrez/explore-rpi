@@ -8,6 +8,7 @@ import org.sense.edgent.app.CountingSensorsAndStreamsMqttTrainStationsApp;
 import org.sense.edgent.app.FraudTicketDetectionMqttTrainStationsApp;
 import org.sense.edgent.app.MultipleSensorsAndStreamsMqttTrainStationsApp;
 import org.sense.edgent.app.MultipleSensorsMqttTrainStationsApp;
+import org.sense.edgent.app.SimulateSkewedDataUsingAdaptablePolledSource;
 import org.sense.edgent.app.TempMultipleSensorMqttApp;
 import org.sense.edgent.app.TempSensorApp;
 import org.sense.edgent.app.TempSensorMqttApp;
@@ -39,6 +40,7 @@ public class App {
 			System.out.println("11 - Multiple sensors and streams on train stations using MQTT connector with Edgent");
 			System.out.println("12 - Counting people using MQTT connector with Edgent");
 			System.out.println("13 - Simulate ticket fraud using MQTT connector with Edgent");
+			System.out.println("14 - Simulate skewed data sources using MQTT connector with Edgent");
 			// @formatter:on
 
 			String msg = "0";
@@ -163,6 +165,13 @@ public class App {
 					ipAddress = "127.0.0.1";
 				}
 				new FraudTicketDetectionMqttTrainStationsApp(ipAddress, "1883");
+				app = 0;
+				break;
+			case 14:
+				if (ipAddress == null) {
+					ipAddress = "127.0.0.1";
+				}
+				new SimulateSkewedDataUsingAdaptablePolledSource(ipAddress, "1883");
 				app = 0;
 				break;
 			default:

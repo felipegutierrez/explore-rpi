@@ -14,6 +14,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>
+		<edgent.version>1.2.0</edgent.version>
+		<flink.version>1.8.1</flink.version>
 	</properties>
 
 	<dependencies>
@@ -38,50 +40,49 @@
 		<dependency>
 			<groupId>org.apache.edgent</groupId>
 			<artifactId>edgent-utils-metrics</artifactId>
-			<version>1.2.0</version>
+			<version>${edgent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.edgent</groupId>
 			<artifactId>edgent-analytics-sensors</artifactId>
-			<version>1.2.0</version>
+			<version>${edgent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.edgent</groupId>
 			<artifactId>edgent-console-server</artifactId>
-			<version>1.2.0</version>
+			<version>${edgent.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.apache.edgent</groupId>
 			<artifactId>edgent-providers-direct</artifactId>
-			<version>1.2.0</version>
+			<version>${edgent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.edgent</groupId>
 			<artifactId>edgent-providers-development</artifactId>
-			<version>1.2.0</version>
+			<version>${edgent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.edgent</groupId>
 			<artifactId>edgent-providers-iot</artifactId>
-			<version>1.2.0</version>
+			<version>${edgent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.edgent</groupId>
 			<artifactId>edgent-analytics-math3</artifactId>
-			<version>1.2.0</version>
+			<version>${edgent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.edgent</groupId>
 			<artifactId>edgent-connectors-mqtt</artifactId>
-			<version>1.2.0</version>
+			<version>${edgent.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.flink/flink-core -->
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-core</artifactId>
-			<version>1.7.0</version>
+			<version>${flink.version}</version>
 		</dependency>
 
 		<dependency>
