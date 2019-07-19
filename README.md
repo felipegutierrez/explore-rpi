@@ -10,7 +10,7 @@ This project is to have fun with Raspberry Pi's and Apache Edgent.
  - Install [wiringPi](http://wiringpi.com/download-and-install/) and use the command `gpio readall` to check the RPi pins against the WiringPi library.
  - add the line `export JAVA_TOOL_OPTIONS="-Dpi4j.linking=dynamic"` on the `/home/pi/.bashrc` file.
  - Install maven `sudo apt install maven`
- - Install MQTT server `sudo apt install mosquitto`
+ - Install MQTT server & clients `sudo apt install mosquitto mosquitto-clients`
 
 ## Execution
 
