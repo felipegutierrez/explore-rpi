@@ -1,3 +1,6 @@
+
+[![Build Status](https://api.travis-ci.org/felipegutierrez/explore-rpi.svg?branch=master)](https://travis-ci.org/felipegutierrez/explore-rpi)
+
 # Raspberry Pi and Apache Edgent
 
 This project is to have fun with Raspberry Pi's and Apache Edgent.
